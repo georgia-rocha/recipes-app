@@ -22,7 +22,7 @@ function Login() {
   };
 
   const handleClickLogin = () => {
-    localStorage.setItem('user', JSON.stringify({ `email: ${login.email}`} ));
+    localStorage.setItem('user', JSON.stringify({ email: login.email }));
     history.push('/meals');
   };
 
