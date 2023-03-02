@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 
 function Login() {
-  const { login, setLogin, btnLogin, setBtnLogin, history } = useContext(RecipesContext);
+  const history = useHistory();
+
+  const { login, setLogin, btnLogin, setBtnLogin } = useContext(RecipesContext);
 
   const validationLogin = () => {
     const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -19,8 +22,8 @@ function Login() {
   };
 
   const handleClickLogin = () => {
-    localStorage.setItem('user', `email: ${login.email}`);
-    history.push('/meal');
+    localStorage.setItem('user', JSON.stringify({ `email: ${login.email}`} ));
+    history.push('/meals');
   };
 
   return (
