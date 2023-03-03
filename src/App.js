@@ -6,7 +6,6 @@ import RecipesProvider from './context/RecipesProvider';
 // import rockGlass from './images/rockGlass.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//
 
 export default function App() {
   return (

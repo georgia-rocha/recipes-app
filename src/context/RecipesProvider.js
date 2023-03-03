@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useMemo, useState, useEffect } from 'react';
 import RecipesContext from './RecipesContext';
+import { fetchRecipes, fetchCategories } from '../helpers/fetchApi';
+import { FIRST_12_RECIPES, FIRST_5_CATEGORIES } from '../helpers/constants';
 
 // Passa o contexto para os componentes filhos
 export default function RecipesProvider({ children }) {
@@ -8,35 +10,41 @@ export default function RecipesProvider({ children }) {
     meals: [],
     drinks: [],
   });
+  const [categories, setCategories] = useState({
+    meals: [],
+    drinks: [],
+  });
 
-  // Busca as receitas da API, limitando a 12
   useEffect(() => {
-    const fetchRecipes = async () => {
-      const mealsResponse = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      );
-      const mealsData = await mealsResponse.json();
-
-      const drinksResponse = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      );
-      const drinksData = await drinksResponse.json();
-
-      const maxRecipes = 12;
+    // Busca as receitas da API, limitando a 12
+    const getRecipes = async () => {
+      const { mealsData, drinksData } = await fetchRecipes();
 
       setRecipes({
-        meals: mealsData.meals.slice(0, maxRecipes),
-        drinks: drinksData.drinks.slice(0, maxRecipes),
+        meals: mealsData.meals.slice(0, FIRST_12_RECIPES),
+        drinks: drinksData.drinks.slice(0, FIRST_12_RECIPES),
       });
     };
-    fetchRecipes();
+
+    // Busca as categorias da API, limitando a 5
+    const getCategories = async () => {
+      const { mealsData, drinksData } = await fetchCategories();
+      setCategories({
+        meals: mealsData.meals.slice(0, FIRST_5_CATEGORIES),
+        drinks: drinksData.drinks.slice(0, FIRST_5_CATEGORIES),
+      });
+    };
+
+    getRecipes();
+    getCategories();
   }, []);
 
   const context = useMemo(
     () => ({
       recipes,
+      categories,
     }),
-    [recipes],
+    [recipes, categories],
   );
 
   return (
