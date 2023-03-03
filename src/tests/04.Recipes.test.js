@@ -39,4 +39,16 @@ describe('1 - Testa a página de receitas', () => {
     const buttons = await screen.findAllByTestId(/-bottom-btn/);
     expect(buttons).toHaveLength(5);
   });
+  it('Exibe as 5 primeiras categorias de refeições na tela "/foods".', async () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
+    history.push('/foods');
+    await getCategories(getByTestId, mealsData.meals, 'Beef');
+  });
+  it('Exibe as 5 primeiras categorias de bebidas na tela "/drinks".', async () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
+    history.push('/drinks');
+    const drinksCategories = [...drinksData.drinks];
+    drinksCategories[2] = { strCategory: 'Shake' };
+    await getCategories(getByTestId, drinksCategories.drinks, 'Shake');
+  });
 });
