@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import RecipesContext from './RecipesContext';
+import LoginContext from './LoginContext';
 
 function LoginProvider({ children }) {
   const [login, setLogin] = useState({
@@ -17,9 +17,9 @@ function LoginProvider({ children }) {
   }), [login, setLogin, btnLogin, setBtnLogin]);
 
   return (
-    <RecipesContext.Provider value={ context }>
+    <LoginContext.Provider value={ context }>
       {children}
-    </RecipesContext.Provider>
+    </LoginContext.Provider>
   );
 }
 

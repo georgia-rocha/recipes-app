@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import RecipesContext from '../context/RecipesContext';
+import LoginContext from '../context/LoginContext';
 
 function Login() {
   const history = useHistory();
 
-  const { login, setLogin, btnLogin, setBtnLogin } = useContext(RecipesContext);
+  const { login, setLogin, btnLogin, setBtnLogin } = useContext(LoginContext);
 
   const validationLogin = () => {
     const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
