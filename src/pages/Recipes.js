@@ -12,6 +12,8 @@ export default function Recipes({ match }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedRecipes, setSelectedRecipes] = useState([]);
 
+  /* Salva as receitas filtradas por categoria no estado.
+  Se a categoria selecionada for 'All', busca as receitas salvas no contexto. */
   useEffect(() => {
     if (selectedCategory === 'All') return;
 
@@ -33,6 +35,7 @@ export default function Recipes({ match }) {
     getRecipesByCategory();
   }, [selectedCategory, match.path]);
 
+  // Salva no estado a categoria clicada ou 'All' se clicar na mesma categoria (desseleciona)
   const handleClick = async (category) => {
     if (selectedCategory === 'All' || selectedCategory !== category) {
       setSelectedCategory(category);

@@ -11,5 +11,8 @@ export const DRINK_RECIPES_URL = `${DRINKS_URL}search.php?s=`;
 export const MEAL_RECIPES_BY_CATEGORY_URL = `${MEALS_URL}filter.php?c=`;
 export const DRINK_RECIPES_BY_CATEGORY_URL = `${DRINKS_URL}filter.php?c=`;
 
+export const MEAL_RECIPES_BY_ID_URL = `${MEALS_URL}lookup.php?i=`;
+export const DRINK_RECIPES_BY_ID_URL = `${DRINKS_URL}lookup.php?i=`;
+
 export const FIRST_5_CATEGORIES = 5;
 export const FIRST_12_RECIPES = 12;

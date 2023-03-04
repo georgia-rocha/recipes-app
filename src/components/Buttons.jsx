@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-// Renderiza botões com as categorias de comidas/bebidas
+// Renderiza botões com as categorias de comidas/bebidas e um botão para todas as categorias
 export default function Buttons({ categories, handleClick }) {
   return (
     <div>

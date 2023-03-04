@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-// Esse componente renderiza as receitas de comidas e bebidas dinamicamente
+/* Esse componente renderiza as receitas de comidas e bebidas dinamicamente.
+Ele recebe um array de objetos com as receitas e o tipo de receita (Meal ou Drink) e renderiza os cards com as informações de cada receita.
+Clicar em um card direciona para a página de detalhes da receita. */
 export default function RecipeCards({ recipes, recipeType }) {
-  const recipesUrl = recipeType === 'Meal' ? 'meals' : 'drinks';
-
   return (
     <div>
       {recipes.map((recipe, index) => (
@@ -13,7 +13,13 @@ export default function RecipeCards({ recipes, recipeType }) {
           key={ recipe[`id${recipeType}`] }
           data-testid={ `${index}-recipe-card` }
         >
-          <Link to={ `/${recipesUrl}/${recipe[`id${recipeType}`]}` }>
+          <Link
+            to={
+              recipeType === 'Meal'
+                ? `/meals/${recipe.idMeal}`
+                : `/drinks/${recipe.idDrink}`
+            }
+          >
             <img
               src={ recipe[`str${recipeType}Thumb`] }
               alt={ recipe[`str${recipeType}`] }

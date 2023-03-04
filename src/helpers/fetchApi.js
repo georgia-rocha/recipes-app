@@ -1,3 +1,4 @@
+// Contém as funções que fazem as requisições à API
 import {
   MEAL_RECIPES_URL,
   DRINK_RECIPES_URL,
@@ -5,6 +6,8 @@ import {
   DRINK_CATEGORIES_URL,
   MEAL_RECIPES_BY_CATEGORY_URL,
   DRINK_RECIPES_BY_CATEGORY_URL,
+  MEAL_RECIPES_BY_ID_URL,
+  DRINK_RECIPES_BY_ID_URL,
 } from './constants';
 
 export const fetchRecipes = async () => {
@@ -30,6 +33,17 @@ export const fetchRecipesByCategory = async (type, category) => {
     return mealsData;
   }
   const drinksResponse = await fetch(`${DRINK_RECIPES_BY_CATEGORY_URL}${category}`);
+  const drinksData = await drinksResponse.json();
+  return drinksData;
+};
+
+export const fetchRecipesById = async (type, id) => {
+  if (type === 'meals') {
+    const mealsResponse = await fetch(`${MEAL_RECIPES_BY_ID_URL}${id}`);
+    const mealsData = await mealsResponse.json();
+    return mealsData;
+  }
+  const drinksResponse = await fetch(`${DRINK_RECIPES_BY_ID_URL}${id}`);
   const drinksData = await drinksResponse.json();
   return drinksData;
 };
