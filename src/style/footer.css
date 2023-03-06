@@ -1,13 +1,14 @@
 .footer {
-    position: fixed;
-    bottom: 0;
-    align-items: center;
+  bottom: 0;
+  align-items: center;
+  position: fixed;
 }
 
 .iconDrink {
-    width: 30px;;
+  width: 30px;
+  ;
 }
 
 .iconMeal {
-    width: 30px;
+  width: 30px;
 }
