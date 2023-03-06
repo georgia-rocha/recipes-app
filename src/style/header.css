@@ -1,0 +1,10 @@
+.header {
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+img {
+  width: 30px;
+}
