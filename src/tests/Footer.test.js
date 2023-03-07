@@ -15,7 +15,7 @@ describe('Testando o component Footer', () => {
     userEvent.click(linkDrink);
 
     await waitFor(() => {
-      expect(history.location.pathname).toBe('/drink');
+      expect(history.location.pathname).toBe('/drinks');
     });
 
     const linkMeals = screen.getByTestId('meals-bottom-btn');
