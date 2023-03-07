@@ -4,7 +4,7 @@ import RecipeIngredients from './RecipeIngredients';
 
 // Renderiza os detalhes da receita de bebida
 export default function DrinkDetails({ recipe }) {
-  const drink = recipe.drinks[0];
+  const drink = recipe;
 
   return (
     <div>

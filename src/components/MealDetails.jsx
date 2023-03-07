@@ -6,7 +6,7 @@ import YoutubeEmbed from './YoutubeEmbed';
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe }) {
   console.log('recipe', recipe);
-  const meal = recipe.meals[0];
+  const meal = recipe;
 
   return (
     <div>
