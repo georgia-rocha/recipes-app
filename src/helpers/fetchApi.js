@@ -37,8 +37,8 @@ export const fetchRecipesByCategory = async (type, category) => {
   return drinksData;
 };
 
-export const fetchRecipesById = async (type, id) => {
-  if (type === 'meals') {
+export const fetchRecipesById = async (pathname, id) => {
+  if (pathname.includes('meals')) {
     const mealsResponse = await fetch(`${MEAL_RECIPES_BY_ID_URL}${id}`);
     const mealsData = await mealsResponse.json();
     return mealsData;

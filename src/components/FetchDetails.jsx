@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import MealDetails from '../components/MealDetails';
-import DrinkDetails from '../components/DrinkDetails';
+import RecipeDetails from '../pages/RecipeDetails';
 import { fetchRecipesById } from '../helpers/fetchApi';
 
-// Página de detalhes da receita
-export default function RecipeDetails() {
+export default function FetchDetails() {
   const [recipeDetails, setRecipeDetails] = useState({});
   const { pathname } = useLocation();
 
@@ -22,7 +20,7 @@ export default function RecipeDetails() {
   console.log('pathname', pathname);
   console.log('id', pathname.split('/')[2]);
 
-  if (pathname.includes('meals')) return <MealDetails recipe={ recipeDetails } />;
-
-  return <DrinkDetails recipe={ recipeDetails } />;
+  return (
+    <RecipeDetails recipeDetails={ recipeDetails } />
+  );
 }
