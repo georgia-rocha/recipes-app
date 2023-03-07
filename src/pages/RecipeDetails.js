@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import MealDetails from '../components/MealDetails';
+import DrinkDetails from '../components/DrinkDetails';
 import { fetchRecipesById } from '../helpers/fetchApi';
 
 // Página de detalhes da receita
@@ -7,20 +9,24 @@ export default function RecipeDetails({ match }) {
   const [recipeDetails, setRecipeDetails] = useState({});
 
   useEffect(() => {
-    async function getRecipeDetails() {
-      const { path, params: { id } } = match;
-      const type = path === '/meals/:id' ? 'meals' : 'drinks';
+    const getRecipeDetails = async () => {
+      const {
+        params: { id },
+        path,
+      } = match;
+
+      const type = path.includes('meals') ? 'meals' : 'drinks';
       const data = await fetchRecipesById(type, id);
       setRecipeDetails(data);
-    }
+      console.log('data', data);
+      console.log(`type: ${type}, id:${id}`);
+    };
     getRecipeDetails();
   }, [match]);
 
-  return (
-    <div>
-      {recipeDetails}
-    </div>
-  );
+  if (recipeDetails.idMeal) return <MealDetails recipe={ recipeDetails } />;
+
+  return <DrinkDetails recipe={ recipeDetails } />;
 }
 
 RecipeDetails.propTypes = {
