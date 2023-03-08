@@ -13,8 +13,7 @@ export default function RecipeDetails() {
     const getRecipeDetails = async () => {
       const id = pathname.split('/')[2];
       const data = await fetchRecipesById(pathname, id);
-      console.log(data, ' data');
-      console.log(id, pathname);
+
       if (pathname.includes('meals')) {
         setRecipeDetails(data?.meals[0]);
       } else {
@@ -23,10 +22,6 @@ export default function RecipeDetails() {
     };
     getRecipeDetails();
   }, [pathname]);
-  /*
-  console.log('recipeDetails', recipeDetails);
-  console.log('pathname', pathname);
-  console.log('id', pathname.split('/')[2]); */
 
   if (pathname.includes('meals')) return <MealDetails recipe={ recipeDetails } />;
 

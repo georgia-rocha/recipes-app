@@ -2,10 +2,33 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function RecipeIngredients({ recipe }) {
-  const getIngredients = (recipeDetails) => recipeDetails.ingredients;
+  const getIngredients = (recipeDetails) => {
+    const ingredients = [];
+    const ingredientsLimit = 20;
+
+    for (let i = 1; i <= ingredientsLimit; i += 1) {
+      if (recipeDetails[`strIngredient${i}`]) {
+        const name = recipeDetails[`strIngredient${i}`];
+        const measure = recipeDetails[`strMeasure${i}`];
+        ingredients.push({ index: i, name, measure });
+      }
+    }
+    return ingredients;
+  };
 
   return (
-    <div>{getIngredients(recipe)}</div>
+    <ul>
+      {getIngredients(recipe).map((ingredient) => (
+        <li
+          key={ ingredient.index }
+          data-testid={ `${ingredient.index}-ingredient-name-and-measure` }
+        >
+          {ingredient.name}
+          {' '}
+          {ingredient.measure}
+        </li>
+      ))}
+    </ul>
   );
 }
 

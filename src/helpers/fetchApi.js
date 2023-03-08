@@ -41,7 +41,6 @@ export const fetchRecipesById = async (pathname, id) => {
   if (pathname.includes('meals')) {
     const mealsResponse = await fetch(`${MEAL_RECIPES_BY_ID_URL}${id}`);
     const mealsData = await mealsResponse.json();
-    console.log(mealsData, 'xablau');
     return mealsData;
   }
   const drinksResponse = await fetch(`${DRINK_RECIPES_BY_ID_URL}${id}`);
