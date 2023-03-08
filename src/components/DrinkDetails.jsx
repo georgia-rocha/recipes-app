@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
+import RecipesContext from '../context/RecipesContext';
+import Recommendations from './Recommendations';
 
 // Renderiza os detalhes da receita de bebida
 export default function DrinkDetails({ recipe }) {
+  const { recipes } = useContext(RecipesContext);
   const drink = recipe;
 
   return (
@@ -19,6 +22,8 @@ export default function DrinkDetails({ recipe }) {
       <RecipeIngredients recipe={ drink } />
       <h2>Instruções</h2>
       <p data-testid="instructions">{drink.strInstructions}</p>
+      <h2>Recomendações</h2>
+      <Recommendations recipes={ recipes.meals } />
     </div>
   );
 }
