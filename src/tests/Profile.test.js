@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Profile from '../pages/Profile';
-import { renderWithRouter } from './helpers/RenderWithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 
 describe('Testa a pege de Profile', () => {
   it('Testa se os componentes são renderizados na tela', () => {

@@ -4,13 +4,14 @@ import React from 'react';
 // Renderiza botões com as categorias de comidas/bebidas e um botão para todas as categorias
 export default function Buttons({ categories, handleClick }) {
   return (
-    <div>
+    <div className="flex justify-around">
       {categories.map((category) => (
         <button
           key={ category.strCategory }
           data-testid={ `${category.strCategory}-category-filter` }
           onClick={ () => handleClick(category.strCategory) }
           type="button"
+          className="bg-yellow-400 rounded-lg px-1.5 py-1 text-sm"
         >
           {category.strCategory}
         </button>

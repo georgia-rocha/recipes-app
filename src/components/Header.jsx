@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import '../style/header.css';
 
 function Header({ title, printIcon = true }) {
   const [btnSearch, setBtnSearch] = useState(false);
@@ -17,8 +16,8 @@ function Header({ title, printIcon = true }) {
   };
 
   return (
-    <header className="header" data-testid="header">
-      <div className="header-container">
+    <header className="w-full h-20 flex flex-col sticky" data-testid="header">
+      <div className="flex h-14 justify-between">
         <h2>
           RECIPES
           <span>app</span>
@@ -30,7 +29,7 @@ function Header({ title, printIcon = true }) {
           printIcon && (
             <button
               type="button"
-              className="btn-search"
+              className=""
               onClick={ () => handleClick() }
             >
               <img src={ searchIcon } alt="searchIcon" data-testid="search-top-btn" />
@@ -48,6 +47,7 @@ function Header({ title, printIcon = true }) {
     </header>
   );
 }
+
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   printIcon: PropTypes.bool.isRequired,

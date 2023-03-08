@@ -5,6 +5,8 @@ import RecipeCards from '../components/RecipeCards';
 import Buttons from '../components/Buttons';
 import { fetchRecipesByCategory } from '../helpers/fetchApi';
 import { FIRST_12_RECIPES } from '../helpers/constants';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 // Renderiza as receitas e categorias de acordo com o path
 export default function Recipes({ match }) {
@@ -45,29 +47,33 @@ export default function Recipes({ match }) {
   };
 
   return (
-    <div>
-      {match.path === '/meals' ? (
-        <>
-          <Buttons categories={ categories.meals } handleClick={ handleClick } />
-          <RecipeCards
-            recipes={
-              selectedCategory !== 'All' ? selectedRecipes : recipes.meals
-            }
-            recipeType="Meal"
-          />
-        </>
-      ) : (
-        <>
-          <Buttons categories={ categories.drinks } handleClick={ handleClick } />
-          <RecipeCards
-            recipes={
-              selectedCategory !== 'All' ? selectedRecipes : recipes.drinks
-            }
-            recipeType="Drink"
-          />
-        </>
-      )}
-    </div>
+    <>
+      <Header title={ match.path === '/meals' ? 'Meals' : 'Drinks' } />
+      <div>
+        {match.path === '/meals' ? (
+          <>
+            <Buttons categories={ categories.meals } handleClick={ handleClick } />
+            <RecipeCards
+              recipes={
+                selectedCategory !== 'All' ? selectedRecipes : recipes.meals
+              }
+              recipeType="Meal"
+            />
+          </>
+        ) : (
+          <>
+            <Buttons categories={ categories.drinks } handleClick={ handleClick } />
+            <RecipeCards
+              recipes={
+                selectedCategory !== 'All' ? selectedRecipes : recipes.drinks
+              }
+              recipeType="Drink"
+            />
+          </>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
 
