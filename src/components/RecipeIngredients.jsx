@@ -6,7 +6,7 @@ export default function RecipeIngredients({ recipe }) {
     const ingredients = [];
     const ingredientsLimit = 20;
 
-    for (let i = 1; i <= ingredientsLimit; i += 1) {
+    for (let i = 0; i <= ingredientsLimit; i += 1) {
       if (recipeDetails[`strIngredient${i}`]) {
         const name = recipeDetails[`strIngredient${i}`];
         const measure = recipeDetails[`strMeasure${i}`];

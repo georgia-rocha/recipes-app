@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithRouter } from './helpers/RenderWithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 import Footer from '../components/Footer';
 
 describe('Testando o component Footer', () => {

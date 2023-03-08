@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import { renderWithRouter } from './helpers/RenderWithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 
 describe('Testa a page Login', () => {
   it('testa se os inputs são renderizados na tela e se o input inicia desabilitado, e testa se é possível digitar nos inputs e a reação do button', async () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithRouter } from './helpers/RenderWithRouter';
+import renderWithRouter from './helpers/renderWithRouter';
 import Header from '../components/Header';
 
 describe('Testando o component Header', () => {
