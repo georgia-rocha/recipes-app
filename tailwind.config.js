@@ -5,7 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        blue: '#41197f',
+        yellow: '#fcc436',
+      },
       fontFamily: {},
     },
   },
