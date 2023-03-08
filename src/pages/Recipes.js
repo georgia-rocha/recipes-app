@@ -39,7 +39,7 @@ export default function Recipes({ match }) {
 
   // Salva no estado a categoria clicada ou 'All' se clicar na mesma categoria (desseleciona)
   const handleClick = async (category) => {
-    if (selectedCategory === 'All' || selectedCategory !== category) {
+    if (selectedCategory !== category) {
       setSelectedCategory(category);
       return;
     }
