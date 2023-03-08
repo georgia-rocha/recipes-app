@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
 
 function LoginProvider({ children }) {
-  const [login, setLogin] = useState({
-    email: '',
-    password: '',
-  });
   const [btnLogin, setBtnLogin] = useState(true);
 
   const context = useMemo(() => ({
-    login,
-    setLogin,
     btnLogin,
     setBtnLogin,
-  }), [login, setLogin, btnLogin, setBtnLogin]);
+  }), [btnLogin, setBtnLogin]);
 
   return (
     <LoginContext.Provider value={ context }>
