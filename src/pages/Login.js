@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContext from '../context/LoginContext';
 
 function Login() {
   const history = useHistory();
+  const [login, setLogin] = useState({
+    email: '',
+    password: '',
+  });
 
-  const { login, setLogin, btnLogin, setBtnLogin } = useContext(LoginContext);
+  const { btnLogin, setBtnLogin } = useContext(LoginContext);
 
   const validationLogin = () => {
     const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -22,6 +26,7 @@ function Login() {
   };
 
   const handleClickLogin = () => {
+    console.log(login.email);
     localStorage.setItem('user', JSON.stringify({ email: login.email }));
     history.push('/meals');
   };
