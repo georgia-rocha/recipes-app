@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function RecipeIngredients({ recipe }) {
+  console.table(recipe);
+
   const getIngredients = (recipeDetails) => {
     const ingredients = [];
     const ingredientsLimit = 20;
@@ -10,7 +12,7 @@ export default function RecipeIngredients({ recipe }) {
       if (recipeDetails[`strIngredient${i}`]) {
         const name = recipeDetails[`strIngredient${i}`];
         const measure = recipeDetails[`strMeasure${i}`];
-        ingredients.push({ index: i, name, measure });
+        ingredients.push({ index: i - 1, name, measure });
       }
     }
     return ingredients;
@@ -22,6 +24,7 @@ export default function RecipeIngredients({ recipe }) {
         <li
           key={ ingredient.index }
           data-testid={ `${ingredient.index}-ingredient-name-and-measure` }
+          id={ ingredient.index }
         >
           {ingredient.name}
           {' '}

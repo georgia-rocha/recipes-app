@@ -50,7 +50,9 @@ function Login() {
         />
       </div>
       <div className="relative top-28 w-3/4">
-        <h1 className="uppercase text-center text-blue text-xl italic">Login</h1>
+        <h1 className="uppercase text-center text-blue text-xl italic">
+          Login
+        </h1>
         <form className="flex flex-col justify-between items-center space-y-2">
           <input
             type="email"
