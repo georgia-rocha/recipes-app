@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
 import YoutubeEmbed from './YoutubeEmbed';
+import RecipesContext from '../context/RecipesContext';
+import Recommendations from './Recommendations';
 
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe }) {
+  const { recipes } = useContext(RecipesContext);
   const meal = recipe;
   const embedId = meal.strYoutube?.split('=')[1];
 
@@ -22,6 +25,8 @@ export default function MealDetails({ recipe }) {
       <h2>Instruções</h2>
       <p data-testid="instructions">{meal.strInstructions}</p>
       <YoutubeEmbed embedId={ embedId } />
+      <h2>Recomendações</h2>
+      <Recommendations recipes={ recipes.drinks } />
     </div>
   );
 }
