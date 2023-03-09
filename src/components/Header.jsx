@@ -18,10 +18,6 @@ function Header({ title, printIcon = true }) {
     }
   };
 
-  const handleChange = (value) => {
-    setSearch(value);
-  };
-
   return (
     <header className="w-full h-20 flex flex-col sticky" data-testid="header">
       <div className="flex h-14 justify-between">
@@ -53,7 +49,7 @@ function Header({ title, printIcon = true }) {
           <input
             type="text"
             data-testid="search-input"
-            onChange={ ({ target: { value } }) => handleChange(value) }
+            onChange={ ({ target: { value } }) => setSearch(value) }
           />)
       }
       <SearchBar />

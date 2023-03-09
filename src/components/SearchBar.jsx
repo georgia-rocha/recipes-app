@@ -1,29 +1,40 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 
 function SearchBar() {
-  const { module, setModule, search, recipes, setRecipes } = useContext(RecipesContext);
+  const { filter, setFilter, search, setRecipes } = useContext(RecipesContext);
+  const history = useHistory();
 
   const getApi = async (endpoint) => {
     const response = await fetch(endpoint);
+    console.log(response);
     const data = await response.json();
     return data;
   };
 
-  const handleClickMeals = async () => {
+  const getFilter = () => {
+    switch (filter) {
+    case 'Name':
+      return 'search.php?s';
+    case 'ingredient':
+      return 'filter.php?i';
+    default:
+      return 'search.php?f';
+    }
+  };
+
+  const handleClick = async () => {
+    const { location: { pathname } } = history;
     const firstLetter = 'first-letter';
-    // let cloneRecipes = recipes;
-    if (search.length > 1 && module === firstLetter) {
+    const recipesPage = pathname.includes('meal') ? 'meal' : 'cocktail';
+    if (search.length !== 1 && filter === firstLetter) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    if (search.length === 1 && module === firstLetter) {
-      const endpointfirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`;
-      console.log('oi');
-      const responseApi = await getApi(endpointfirstLetter);
-      console.log(responseApi);
-      setRecipes(...recipes, recipes.drinks(responseApi));
-    }
-    console.log(recipes);
+    const endpointfirstLetter = `https://www.the${recipesPage}db.com/api/json/v1/1/${getFilter()}=${search}`;
+    const responseApi = await getApi(endpointfirstLetter);
+    console.log(responseApi);
+    setRecipes(responseApi);
   };
 
   return (
@@ -32,11 +43,11 @@ function SearchBar() {
         <input
           type="radio"
           id="ingredient"
-          name={ module }
+          name={ filter }
           value="ingredient"
           data-testid="ingredient-search-radio"
-          checked={ module === 'ingredient' }
-          onChange={ ({ target: { value } }) => setModule(value) }
+          checked={ filter === 'ingredient' }
+          onChange={ ({ target: { value } }) => setFilter(value) }
         />
         Ingredientes
       </label>
@@ -44,11 +55,11 @@ function SearchBar() {
         <input
           type="radio"
           id="Name"
-          name={ module }
+          name={ filter }
           value="Name"
           data-testid="name-search-radio"
-          checked={ module === 'Name' }
-          onChange={ ({ target: { value } }) => setModule(value) }
+          checked={ filter === 'Name' }
+          onChange={ ({ target: { value } }) => setFilter(value) }
         />
         Name
       </label>
@@ -56,18 +67,18 @@ function SearchBar() {
         <input
           type="radio"
           id="first-letter"
-          name={ module }
+          name={ filter }
           value="first-letter"
           data-testid="first-letter-search-radio"
-          checked={ module === 'first-letter' }
-          onChange={ ({ target: { value } }) => setModule(value) }
+          checked={ filter === 'first-letter' }
+          onChange={ ({ target: { value } }) => setFilter(value) }
         />
         First letter
       </label>
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ handleClickMeals }
+        onClick={ handleClick }
       >
         Search
       </button>

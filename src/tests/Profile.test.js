@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import Profile from '../pages/Profile';
 import renderWithRouter from './helpers/renderWithRouter';
 
-describe('Testa a pege de Profile', () => {
+describe('Testa a page de Profile', () => {
   it('Testa se os componentes são renderizados na tela', () => {
     window.localStorage.setItem('user', JSON.stringify({ email: 'teste@teste.com' }));
     renderWithRouter(<Profile />);

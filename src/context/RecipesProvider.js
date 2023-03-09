@@ -15,7 +15,7 @@ export default function RecipesProvider({ children }) {
     drinks: [],
   });
   const [search, setSearch] = useState('');
-  const [module, setModule] = useState('');
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     // Busca as receitas da API, limitando a 12
@@ -44,13 +44,14 @@ export default function RecipesProvider({ children }) {
   const context = useMemo(
     () => ({
       recipes,
+      setRecipes,
       categories,
       search,
       setSearch,
-      module,
-      setModule,
+      filter,
+      setFilter,
     }),
-    [recipes, categories, search, setSearch, module, setModule],
+    [recipes, setRecipes, categories, search, setSearch, filter, setFilter],
   );
 
   return (
