@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function RecipeIngredients({ recipe }) {
-  console.table(recipe);
-
   const getIngredients = (recipeDetails) => {
     const ingredients = [];
     const ingredientsLimit = 20;

@@ -31,7 +31,7 @@ export default function Header({ title, printIcon = true }) {
 
   return (
     <header>
-      <navbar
+      <nav
         className="flex flex-col sticky bg-yellow px-3"
         data-testid="header"
       >
@@ -39,7 +39,7 @@ export default function Header({ title, printIcon = true }) {
           <LogoTitle />
           <HeaderIcons handleClick={ handleClick } printIcon={ printIcon } />
         </div>
-      </navbar>
+      </nav>
       <div className="py-2 px-3 flex flex-col space-y-1">
         {displayTitleIcon(title)}
         <h1

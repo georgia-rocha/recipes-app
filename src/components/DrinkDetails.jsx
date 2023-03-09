@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
 import RecipesContext from '../context/RecipesContext';
 import Recommendations from './Recommendations';
+import RecipeButtons from './RecipeButtons';
 
 // Renderiza os detalhes da receita de bebida
 export default function DrinkDetails({ recipe }) {
@@ -11,6 +12,7 @@ export default function DrinkDetails({ recipe }) {
 
   return (
     <div>
+      <RecipeButtons recipe={ recipe } />
       <img
         src={ drink.strDrinkThumb }
         alt={ drink.strDrink }

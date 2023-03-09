@@ -4,6 +4,7 @@ import RecipeIngredients from './RecipeIngredients';
 import YoutubeEmbed from './YoutubeEmbed';
 import RecipesContext from '../context/RecipesContext';
 import Recommendations from './Recommendations';
+import RecipeButtons from './RecipeButtons';
 
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe }) {
@@ -13,6 +14,7 @@ export default function MealDetails({ recipe }) {
 
   return (
     <div>
+      <RecipeButtons recipe={ recipe } />
       <img
         src={ meal.strMealThumb }
         alt={ meal.strMeal }
