@@ -3,10 +3,16 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import Header from '../components/Header';
+import RecipesProvider from '../context/RecipesProvider';
 
 describe('Testando o component Header', () => {
-  it('Testa se é renderizado o component Header e se as imagens redirecionam o user a rota correta', async () => {
-    const { history } = renderWithRouter(<Header />);
+  it('Testa se é renderizado o component Header e se as imagens redirecionam o user a rota correta', () => {
+    const { history } = renderWithRouter(
+      <RecipesProvider>
+        <Header />
+      </RecipesProvider>,
+    );
+
     const header = screen.getByTestId('header');
     expect(header).toBeInTheDocument();
 
@@ -20,7 +26,7 @@ describe('Testando o component Header', () => {
     expect(search).toBeInTheDocument();
     userEvent.click(search);
 
-    await waitFor(() => {
+    waitFor(() => {
       const inputSearh = screen.getByTestId('search-input');
       expect(inputSearh).toBeInTheDocument();
       userEvent.click(search);
@@ -31,7 +37,7 @@ describe('Testando o component Header', () => {
     expect(iconProfile).toBeInTheDocument();
     userEvent.click(iconProfile);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/profile');
       const titlePage = screen.getByTestId('page-title');
       expect(titlePage).toBeInTheDocument();

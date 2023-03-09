@@ -31,8 +31,8 @@ function SearchBar() {
     if (search.length !== 1 && filter === firstLetter) {
       return global.alert('Your search must have only 1 (one) character');
     }
-    const endpointfirstLetter = `https://www.the${recipesPage}db.com/api/json/v1/1/${getFilter()}=${search}`;
-    const responseApi = await getApi(endpointfirstLetter);
+    const endpointFirstLetter = `https://www.the${recipesPage}db.com/api/json/v1/1/${getFilter()}=${search}`;
+    const responseApi = await getApi(endpointFirstLetter);
     console.log(responseApi);
     setRecipes(responseApi);
   };
