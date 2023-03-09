@@ -72,7 +72,7 @@ export default function Login() {
             className="w-full border py-2 px-3 rounded-md placeholder:text-blue/50"
           />
           <button
-            type="submit"
+            type="button"
             data-testid="login-submit-btn"
             disabled={ btnLogin }
             onClick={ handleClickLogin }
