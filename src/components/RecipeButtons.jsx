@@ -21,7 +21,9 @@ export default function RecipeButtons({ recipe }) {
   }, [recipe]);
 
   const copyLink = () => {
-    copy(window.location.href);
+    const link = window.location.href;
+    const parsedLink = link.replace('/in-progress', '');
+    copy(parsedLink);
     setIsLinkCopied(true);
   };
 

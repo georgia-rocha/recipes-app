@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
 
-function LoginProvider({ children }) {
+export default function LoginProvider({ children }) {
   const [btnLogin, setBtnLogin] = useState(true);
 
   const context = useMemo(
@@ -21,5 +21,3 @@ function LoginProvider({ children }) {
 LoginProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default LoginProvider;

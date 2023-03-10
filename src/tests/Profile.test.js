@@ -18,9 +18,6 @@ describe('Testa a page de Profile', () => {
       </RecipesProvider>,
     );
 
-    renderWithRouter(<Profile />);
-
-
     const header = screen.getByTestId('header');
     const email = screen.getByTestId('profile-email');
     const emailText = screen.getByText('teste@teste.com');
@@ -38,17 +35,12 @@ describe('Testa a page de Profile', () => {
     expect(footer).toBeInTheDocument();
   });
 
-
-  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', async () => {
+  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', () => {
     const { history } = renderWithRouter(
       <RecipesProvider>
         <Profile />
       </RecipesProvider>,
     );
-
-  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', () => {
-    const { history } = renderWithRouter(<Profile />);
-
 
     const btnDoneRecipes = screen.getByTestId('profile-done-btn');
     userEvent.click(btnDoneRecipes);
@@ -57,17 +49,12 @@ describe('Testa a page de Profile', () => {
     });
   });
 
-
-  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', async () => {
+  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', () => {
     const { history } = renderWithRouter(
       <RecipesProvider>
         <Profile />
       </RecipesProvider>,
     );
-
-  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', () => {
-    const { history } = renderWithRouter(<Profile />);
-
 
     const btnFavorites = screen.getByTestId('profile-favorite-btn');
     userEvent.click(btnFavorites);
@@ -76,16 +63,12 @@ describe('Testa a page de Profile', () => {
     });
   });
 
-
   it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', async () => {
     const { history } = renderWithRouter(
       <RecipesProvider>
         <Profile />
       </RecipesProvider>,
     );
-
-  it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', () => {
-    const { history } = renderWithRouter(<Profile />);
 
     const btnLogout = screen.getByTestId('profile-logout-btn');
     userEvent.click(btnLogout);

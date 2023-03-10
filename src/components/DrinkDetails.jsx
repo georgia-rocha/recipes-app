@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
 import RecipesContext from '../context/RecipesContext';
-import Recommendations from './Recommendations';
 import RecipeButtons from './RecipeButtons';
 import RecommendationsMeals from './RecommendationsMeals';
 

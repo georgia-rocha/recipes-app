@@ -1,5 +1,4 @@
 // Contém as constantes utilizadas no projeto
-
 const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 

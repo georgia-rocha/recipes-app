@@ -26,52 +26,38 @@ export default function Profile() {
       <div className="mb-14">
         <Header title="Profile" printIcon={ false } />
         <p data-testid="profile-email">{emailLogin?.email}</p>
-    <div>
-      <Header title="Profile" printIcon={ false } />
-      <h3 data-testid="h3rofile-email">
-        { emailLogin?.email }
-      </h3>
 
-      <Link to="/done-recipes">
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          onClick={ redirectDoneRecipes }
-        >
-          Done Recipes
-        </button>
-<<<<<<< HEAD
-=======
-      </Link>
+        <Link to="/done-recipes">
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            onClick={ redirectDoneRecipes }
+          >
+            Done Recipes
+          </button>
+        </Link>
 
-      <Link to="/favorite-recipes">
->>>>>>> main-group-1-cria-tela-detalhes-2
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          onClick={ redirectFavorites }
-        >
-          Favorite Recipes
-        </button>
-<<<<<<< HEAD
-=======
-      </Link>
+        <Link to="/favorite-recipes">
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+            onClick={ redirectFavorites }
+          >
+            Favorite Recipes
+          </button>
+        </Link>
 
-      <Link to="/">
->>>>>>> main-group-1-cria-tela-detalhes-2
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ handleLogout }
-        >
-          Logout
-        </button>
-<<<<<<< HEAD
+        <Link to="/">
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ handleLogout }
+          >
+            Logout
+          </button>
+        </Link>
       </div>
-=======
-      </Link>
 
->>>>>>> main-group-1-cria-tela-detalhes-2
       <Footer />
     </>
   );

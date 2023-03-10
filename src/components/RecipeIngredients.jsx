@@ -34,8 +34,6 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
       setFinishedSteps(currentFinishedSteps);
     }
   }, []);
-export default function RecipeIngredients({ recipe }) {
-  // console.table(recipe);
 
   const getIngredients = (recipeDetails) => {
     const ingredients = [];
@@ -89,6 +87,7 @@ export default function RecipeIngredients({ recipe }) {
                 data-testid={ `${ingredient.index}-ingredient-step` }
                 onChange={ () => toggleFinishedStep(ingredient.index) }
                 checked={ isStepFinished(ingredient.index) }
+                className="mr-1"
               />
             )}
             <span

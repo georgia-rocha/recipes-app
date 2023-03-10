@@ -44,19 +44,23 @@ export default function RecipesProvider({ children }) {
       recipes,
       setRecipes,
       categories,
-
+      startedRecipes,
+      setStartedRecipes,
       search,
       setSearch,
       filter,
       setFilter,
     }),
-    [recipes, setRecipes, categories, search, setSearch, filter, setFilter],
-
+    [
+      recipes,
+      setRecipes,
+      categories,
+      search,
+      setSearch,
+      filter,
+      setFilter,
       startedRecipes,
-      setStartedRecipes,
-    }),
-    [recipes, categories, startedRecipes],
-
+    ],
   );
 
   return (
