@@ -28,9 +28,16 @@ export default function Login() {
   };
 
   const handleClickLogin = () => {
-    console.log(login.email);
     localStorage.setItem('user', JSON.stringify({ email: login.email }));
     history.push('/meals');
+  };
+
+  const styleButton = () => {
+    const defaultStyle = (
+      'bg-yellow text-white w-full py-2 rounded-md font-bold uppercase'
+    );
+    const disabledStyle = `${defaultStyle} opacity-50 cursor-not-allowed`;
+    return btnLogin ? disabledStyle : defaultStyle;
   };
 
   return (
@@ -76,7 +83,7 @@ export default function Login() {
             data-testid="login-submit-btn"
             disabled={ btnLogin }
             onClick={ handleClickLogin }
-            className="bg-yellow text-white w-full py-2 rounded-md font-bold uppercase"
+            className={ styleButton() }
           >
             Enter
           </button>
