@@ -51,3 +51,31 @@ export const fetchRecipesById = async (pathname, id) => {
   const drinksData = await drinksResponse.json();
   return drinksData;
 };
+
+export const filterMeals = async (endpoint) => {
+  try {
+    if (endpoint === '' || endpoint === null) {
+      return [];
+    }
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    return data.meals;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+
+export const filterDrinks = async (endpoint) => {
+  try {
+    if (endpoint === '' || endpoint === null) {
+      return [];
+    }
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    return data.drinks;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
