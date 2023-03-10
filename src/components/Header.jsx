@@ -49,7 +49,7 @@ export default function Header({ title, printIcon = true }) {
           <input
             type="text"
             data-testid="search-input"
-            className="py-1 px-2 border-2 border-blue rounded-md"
+            className="py-1 px-2 border-[1px] border-blue rounded-md"
           />
         )}
       </div>
