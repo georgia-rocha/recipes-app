@@ -7,14 +7,11 @@ import RecipesProvider from '../context/RecipesProvider';
 
 describe('Testando o component Header', () => {
   it('Testa se é renderizado o component Header e se as imagens redirecionam o user a rota correta', () => {
-
     const { history } = renderWithRouter(
       <RecipesProvider>
         <Header />
       </RecipesProvider>,
     );
-
-    const { history } = renderWithRouter(<Header />);
 
     const header = screen.getByTestId('header');
     expect(header).toBeInTheDocument();
@@ -30,11 +27,11 @@ describe('Testando o component Header', () => {
     userEvent.click(search);
 
     waitFor(() => {
-      const inputSearh = screen.getByTestId('search-input');
-      expect(inputSearh).toBeInTheDocument();
-      userEvent.type(inputSearh, 'chicken');
+      const inputSearch = screen.getByTestId('search-input');
+      expect(inputSearch).toBeInTheDocument();
+      userEvent.type(inputSearch, 'chicken');
       userEvent.click(search);
-      expect(inputSearh).not.toBeInTheDocument();
+      expect(inputSearch).not.toBeInTheDocument();
     });
 
     const iconProfile = screen.getByTestId('profile-top-btn');

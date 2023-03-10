@@ -6,7 +6,7 @@ import { fetchDrinks12Cards } from '../helpers/fetchApi';
 // Recomendação de Drinks para o componente Carousel
 const maxRecommendations = 6;
 
-function RecommendationsDrinks() {
+export default function RecommendationsDrinks() {
   const [drinks, setDrink] = useState([]);
 
   useEffect(() => {
@@ -32,34 +32,26 @@ function RecommendationsDrinks() {
       <div className="carousel-container">
         <Carousel>
           {IMAGE_TWO.map((image, index) => (
-            <Carousel.Item
-              key={ index }
-            >
+            <Carousel.Item key={ index }>
               <div className="d-flex justify-content-around">
-                <div data-testid={ `${(index * 2)}-recommendation-card` }>
+                <div data-testid={ `${index * 2}-recommendation-card` }>
                   <img
                     className="d-block w-45"
                     src={ image[0].strDrinkThumb }
                     alt={ image[0].strDrink }
                   />
-                  <h5
-                    data-testid={ `${(index * 2)}-recommendation-title` }
-                  >
+                  <h5 data-testid={ `${index * 2}-recommendation-title` }>
                     {image[0].strDrink}
-
                   </h5>
                 </div>
-                <div data-testid={ `${(index * 2) + 1}-recommendation-card` }>
+                <div data-testid={ `${index * 2 + 1}-recommendation-card` }>
                   <img
                     className="d-block w-45"
                     src={ image[1].strDrinkThumb }
                     alt={ image[1].strDrink }
                   />
-                  <h5
-                    data-testid={ `${(index * 2) + 1}-recommendation-title` }
-                  >
+                  <h5 data-testid={ `${index * 2 + 1}-recommendation-title` }>
                     {image[1].strDrink}
-
                   </h5>
                 </div>
               </div>
@@ -71,7 +63,6 @@ function RecommendationsDrinks() {
             type="button"
             data-testid="start-recipe-btn"
             className="btn btn-start-recipe btn-start"
-
           >
             Start Recipe
           </button>
@@ -80,28 +71,3 @@ function RecommendationsDrinks() {
     </div>
   );
 }
-export default RecommendationsDrinks;
-//   const mapSixDrinks = () => {
-//     const items = drinks.map((drink, index) => (
-//       <Carousel.Item
-//         key={ index }
-//         data-testid={ `${index}-recommendation-card` }
-//       >
-
-//         <img
-//           className="carousel-img"
-//           src={ drink.strDrinkThumb }
-//           alt={ drink.strDrink }
-
-//         />
-
-//         <div>
-//           <h5 data-testid={ `${index}-recommendation-title` }>{drink.strDrink}</h5>
-//         </div>
-//       </Carousel.Item>
-//     ));
-//     return <Carousel>{items}</Carousel>;
-//   };
-//   return (
-//     mapSixDrinks()
-//   );

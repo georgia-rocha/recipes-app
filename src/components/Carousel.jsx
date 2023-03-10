@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import RecommendationsDrinks from './RecommendationsDrinks';
 import RecommendationsMeals from './RecommendationsMeals';
 
-function Carousel({ path }) {
+export default function Carousel({ path }) {
   return (
     <div className="carousel">
-      {path.includes('meals') ? <RecommendationsDrinks /> : <RecommendationsMeals />}
+      {path.includes('meals') ? (
+        <RecommendationsDrinks />
+      ) : (
+        <RecommendationsMeals />
+      )}
     </div>
   );
 }
@@ -14,5 +18,3 @@ function Carousel({ path }) {
 Carousel.propTypes = {
   path: PropTypes.string.isRequired,
 };
-
-export default Carousel;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import SearchBar from '../components/SearchBar';
@@ -22,19 +22,24 @@ describe('Testa o componente SearchBar', () => {
     expect(radioFirstLetter).toBeInTheDocument();
     expect(buttonSearch).toBeInTheDocument();
   });
-  it('Testa o radio Ingredientes', async () => {
-    renderWithRouter(<SearchBar />);
+
+  it('Testa o radio Ingredientes', () => {
+    renderWithRouter(
+      <RecipesProvider>
+        <SearchBar />
+      </RecipesProvider>,
+    );
     const radioIngredients = screen.getByTestId('ingredient-search-radio');
     const buttonSearch = screen.getByTestId('exec-search-btn');
 
     userEvent.click(radioIngredients);
     userEvent.click(buttonSearch);
-    await waitFor(() => {
-      const index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      index.forEach((i) => {
-        const recipes = screen.getByTestId(`${i}-recipe-card`);
-        expect(recipes).toBeInTheDocument();
-      });
+
+    const index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    index.forEach(async (i) => {
+      const recipes = await screen.findByTestId(`${i}-recipe-card`);
+      expect(recipes).toBeInTheDocument();
     });
   });
 });

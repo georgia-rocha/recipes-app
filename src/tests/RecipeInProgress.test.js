@@ -28,7 +28,9 @@ describe('Testa a página de receitas em progresso', () => {
     expect(history.location.pathname).toBe('/meals/52977/in-progress');
     expect(await screen.findByTestId(/recipe-title/i)).toBeInTheDocument();
     expect(await screen.findByTestId(/recipe-category/i)).toBeInTheDocument();
-    expect(await screen.findByTestId(/0-ingredient-name-and-measure/i)).toBeInTheDocument();
+    expect(
+      await screen.findByTestId(/0-ingredient-name-and-measure/i),
+    ).toBeInTheDocument();
     expect(await screen.findByTestId(/instructions/i)).toBeInTheDocument();
   });
 

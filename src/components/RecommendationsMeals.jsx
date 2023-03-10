@@ -5,7 +5,8 @@ import { fetchMeals12Cards } from '../helpers/fetchApi';
 // Recomendação de Meals para o componente Carousel
 
 const maxRecommendations = 6;
-function RecommendationsMeals() {
+
+export default function RecommendationsMeals() {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
@@ -31,40 +32,31 @@ function RecommendationsMeals() {
       <div className="carousel-container">
         <Carousel>
           {IMAGE_TWO.map((image, index) => (
-            <Carousel.Item
-              key={ index }
-            >
+            <Carousel.Item key={ index }>
               <div className="d-flex justify-content-around">
-                <div data-testid={ `${(index * 2)}-recommendation-card` }>
+                <div data-testid={ `${index * 2}-recommendation-card` }>
                   <img
                     className="d-block w-45"
                     src={ image[0].strMealThumb }
                     alt={ image[0].strMeal }
                   />
-                  <h5
-                    data-testid={ `${(index * 2)}-recommendation-title` }
-                  >
+                  <h5 data-testid={ `${index * 2}-recommendation-title` }>
                     {image[0].strMeal}
-
                   </h5>
                 </div>
-                <div data-testid={ `${(index * 2) + 1}-recommendation-card` }>
+                <div data-testid={ `${index * 2 + 1}-recommendation-card` }>
                   <img
                     className="d-block w-45"
                     src={ image[1].strMealThumb }
                     alt={ image[1].strMeal }
                   />
-                  <h5
-                    data-testid={ `${(index * 2) + 1}-recommendation-title` }
-                  >
+                  <h5 data-testid={ `${index * 2 + 1}-recommendation-title` }>
                     {image[1].strMeal}
-
                   </h5>
                 </div>
               </div>
             </Carousel.Item>
           ))}
-
         </Carousel>
       </div>
       <div>
@@ -79,4 +71,3 @@ function RecommendationsMeals() {
     </div>
   );
 }
-export default RecommendationsMeals;
