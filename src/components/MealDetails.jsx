@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
 import YoutubeEmbed from './YoutubeEmbed';
 import RecipesContext from '../context/RecipesContext';
-import Recommendations from './Recommendations';
+import RecommendationsDrinks from './RecommendationsDrinks';
 
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe }) {
@@ -26,7 +26,7 @@ export default function MealDetails({ recipe }) {
       <p data-testid="instructions">{meal.strInstructions}</p>
       <YoutubeEmbed embedId={ embedId } />
       <h2>Recomendações</h2>
-      <Recommendations recipes={ recipes.drinks } />
+      <RecommendationsDrinks recipes={ recipes.drinks } />
     </div>
   );
 }

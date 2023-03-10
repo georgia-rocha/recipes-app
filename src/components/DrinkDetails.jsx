@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
 import RecipesContext from '../context/RecipesContext';
-import Recommendations from './Recommendations';
+import RecommendationsMeals from './RecommendationsMeals';
 
 // Renderiza os detalhes da receita de bebida
 export default function DrinkDetails({ recipe }) {
@@ -23,7 +23,7 @@ export default function DrinkDetails({ recipe }) {
       <h2>Instruções</h2>
       <p data-testid="instructions">{drink.strInstructions}</p>
       <h2>Recomendações</h2>
-      <Recommendations recipes={ recipes.meals } />
+      <RecommendationsMeals recipes={ recipes.meals } />
     </div>
   );
 }
