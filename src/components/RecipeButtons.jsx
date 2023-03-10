@@ -12,9 +12,10 @@ export default function RecipeButtons({ recipe }) {
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
 
-    const isFavoriteRecipe = favoriteRecipes.some((favoriteRecipe) => (
-      favoriteRecipe.id === recipe.idMeal || favoriteRecipe.id === recipe.idDrink
-    ));
+    const isFavoriteRecipe = favoriteRecipes.some(
+      (favoriteRecipe) => favoriteRecipe.id === recipe.idMeal
+        || favoriteRecipe.id === recipe.idDrink,
+    );
 
     setIsFavorite(isFavoriteRecipe);
   }, [recipe]);
@@ -26,13 +27,19 @@ export default function RecipeButtons({ recipe }) {
 
   const toggleRecipesAsFavorite = () => {
     if (isFavorite) {
-      const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const favoriteRecipes = JSON.parse(
+        localStorage.getItem('favoriteRecipes'),
+      );
 
-      const newFavoriteRecipes = favoriteRecipes.filter((favoriteRecipe) => (
-        favoriteRecipe.id !== recipe.idMeal && favoriteRecipe.id !== recipe.idDrink
-      ));
+      const newFavoriteRecipes = favoriteRecipes.filter(
+        (favoriteRecipe) => favoriteRecipe.id !== recipe.idMeal
+          && favoriteRecipe.id !== recipe.idDrink,
+      );
 
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+      localStorage.setItem(
+        'favoriteRecipes',
+        JSON.stringify(newFavoriteRecipes),
+      );
       setIsFavorite(false);
       return;
     }

@@ -6,7 +6,10 @@ import renderWithRouter from './helpers/renderWithRouter';
 
 describe('Testa a pege de Profile', () => {
   it('Testa se os componentes são renderizados na tela', () => {
-    window.localStorage.setItem('user', JSON.stringify({ email: 'teste@teste.com' }));
+    window.localStorage.setItem(
+      'user',
+      JSON.stringify({ email: 'teste@teste.com' }),
+    );
     renderWithRouter(<Profile />);
 
     const header = screen.getByTestId('header');
@@ -26,31 +29,31 @@ describe('Testa a pege de Profile', () => {
     expect(footer).toBeInTheDocument();
   });
 
-  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', async () => {
+  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', () => {
     const { history } = renderWithRouter(<Profile />);
 
     const btnDoneRecipes = screen.getByTestId('profile-done-btn');
     userEvent.click(btnDoneRecipes);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/done-recipes');
     });
   });
 
-  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', async () => {
+  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', () => {
     const { history } = renderWithRouter(<Profile />);
 
     const btnFavorites = screen.getByTestId('profile-favorite-btn');
     userEvent.click(btnFavorites);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/favorite-recipes');
     });
   });
 
-  it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', async () => {
+  it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', () => {
     const { history } = renderWithRouter(<Profile />);
     const btnLogout = screen.getByTestId('profile-logout-btn');
     userEvent.click(btnLogout);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/');
     });
   });

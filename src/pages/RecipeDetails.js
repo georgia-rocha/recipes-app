@@ -1,11 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MealDetails from '../components/MealDetails';
 import DrinkDetails from '../components/DrinkDetails';
 import { fetchRecipesById } from '../helpers/fetchApi';
+import FinishRecipeButton from '../components/FinishRecipeButton';
 
 // Página de detalhes da receita
-export default function RecipeDetails() {
+export default function RecipeDetails({ isRecipeStarted = false }) {
   const [recipeDetails, setRecipeDetails] = useState({});
   const { pathname } = useLocation();
 
@@ -23,7 +25,23 @@ export default function RecipeDetails() {
     getRecipeDetails();
   }, [pathname]);
 
-  if (pathname.includes('meals')) return <MealDetails recipe={ recipeDetails } />;
+  if (pathname.includes('meals')) {
+    return (
+      <>
+        <MealDetails recipe={ recipeDetails } />
+        {isRecipeStarted && <FinishRecipeButton />}
+      </>
+    );
+  }
 
-  return <DrinkDetails recipe={ recipeDetails } />;
+  return (
+    <>
+      <DrinkDetails recipe={ recipeDetails } />
+      {isRecipeStarted && <FinishRecipeButton />}
+    </>
+  );
 }
+
+RecipeDetails.propTypes = {
+  isRecipeStarted: PropTypes.bool,
+};

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipeIngredients from './RecipeIngredients';
-import YoutubeEmbed from './YoutubeEmbed';
+import YouTubeEmbed from './YouTubeEmbed';
 import RecipesContext from '../context/RecipesContext';
 import Recommendations from './Recommendations';
 import RecipeButtons from './RecipeButtons';
@@ -26,7 +26,7 @@ export default function MealDetails({ recipe }) {
       <RecipeIngredients recipe={ meal } />
       <h2>Instruções</h2>
       <p data-testid="instructions">{meal.strInstructions}</p>
-      <YoutubeEmbed embedId={ embedId } />
+      <YouTubeEmbed embedId={ embedId } />
       <h2>Recomendações</h2>
       <Recommendations recipes={ recipes.drinks } />
     </div>

@@ -5,15 +5,16 @@ import LoginContext from './LoginContext';
 function LoginProvider({ children }) {
   const [btnLogin, setBtnLogin] = useState(true);
 
-  const context = useMemo(() => ({
-    btnLogin,
-    setBtnLogin,
-  }), [btnLogin, setBtnLogin]);
+  const context = useMemo(
+    () => ({
+      btnLogin,
+      setBtnLogin,
+    }),
+    [btnLogin, setBtnLogin],
+  );
 
   return (
-    <LoginContext.Provider value={ context }>
-      {children}
-    </LoginContext.Provider>
+    <LoginContext.Provider value={ context }>{children}</LoginContext.Provider>
   );
 }
 

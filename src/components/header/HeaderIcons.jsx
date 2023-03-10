@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
 
 export default function HeaderIcons({ printIcon = true, handleClick }) {
   return (
@@ -30,6 +30,6 @@ export default function HeaderIcons({ printIcon = true, handleClick }) {
 }
 
 HeaderIcons.propTypes = {
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func.isRequired,
   printIcon: PropTypes.bool,
-}.isRequired;
+};

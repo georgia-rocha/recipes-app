@@ -4,7 +4,7 @@ import iconDrink from '../images/drinkIcon.svg';
 import iconMeals from '../images/mealIcon.svg';
 import '../styles/footer.scss';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer data-testid="footer" className="footer">
       <Link to="/drinks">
@@ -26,5 +26,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

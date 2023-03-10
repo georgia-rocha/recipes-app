@@ -5,7 +5,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import Footer from '../components/Footer';
 
 describe('Testando o component Footer', () => {
-  it('Testa se é renderizado o component Footer e se as imagens redirecionam o user a rota correta', async () => {
+  it('Testa se é renderizado o component Footer e se as imagens redirecionam o user a rota correta', () => {
     const { history } = renderWithRouter(<Footer />);
     const footer = screen.getByTestId('footer');
     expect(footer).toBeInTheDocument();
@@ -14,7 +14,7 @@ describe('Testando o component Footer', () => {
     expect(linkDrink).toBeInTheDocument();
     userEvent.click(linkDrink);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/drinks');
     });
 
@@ -22,7 +22,7 @@ describe('Testando o component Footer', () => {
     expect(linkMeals).toBeInTheDocument();
     userEvent.click(linkMeals);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/meals');
     });
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import recipesIcon from '../images/recipesIcon.svg';
+import recipesIcon from '../../images/recipesIcon.svg';
 
 export default function LogoTitle() {
   return (
