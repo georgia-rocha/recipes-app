@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/YoutubeEmbed.module.scss';
 
-export default function YoutubeEmbed({ embedId }) {
+export default function YouTubeEmbed({ embedId }) {
   return (
     <div className={ styles.video_responsive }>
       <iframe
@@ -10,13 +10,13 @@ export default function YoutubeEmbed({ embedId }) {
         height="480"
         src={ `https://www.youtube.com/embed/${embedId}` }
         allowFullScreen
-        title="Embedded youtube"
+        title="Embedded YouTube"
         data-testid="video"
       />
     </div>
   );
 }
 
-YoutubeEmbed.propTypes = {
+YouTubeEmbed.propTypes = {
   embedId: PropTypes.string,
 }.isRequired;

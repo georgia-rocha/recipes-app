@@ -7,11 +7,12 @@ Ele recebe um array de objetos com as receitas e o tipo de receita (Meal ou Drin
 Clicar em um card direciona para a página de detalhes da receita. */
 export default function RecipeCards({ recipes, recipeType }) {
   return (
-    <div>
+    <div className="columns-2 px-2 mt-1 space-y-4">
       {recipes.map((recipe, index) => (
         <div
           key={ recipe[`id${recipeType}`] }
           data-testid={ `${index}-recipe-card` }
+          className="p-2 rounded shadow"
         >
           <Link
             to={
@@ -19,15 +20,20 @@ export default function RecipeCards({ recipes, recipeType }) {
                 ? `/meals/${recipe.idMeal}`
                 : `/drinks/${recipe.idDrink}`
             }
+            className="no-underline"
           >
             <img
               src={ recipe[`str${recipeType}Thumb`] }
               alt={ recipe[`str${recipeType}`] }
               data-testid={ `${index}-card-img` }
+              className="rounded"
             />
-            <p data-testid={ `${index}-card-name` }>
+            <h3
+              data-testid={ `${index}-card-name` }
+              className="text-center text-lg pt-2 text-blue"
+            >
               {recipe[`str${recipeType}`]}
-            </p>
+            </h3>
           </Link>
         </div>
       ))}

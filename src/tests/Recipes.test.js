@@ -58,9 +58,13 @@ describe('Testa a página de receitas', () => {
 
     expect(await screen.findByText(/corba/i)).toBeInTheDocument();
 
-    const categoryBeefButton = await screen.findByRole('button', { name: /beef/i });
+    const categoryBeefButton = await screen.findByRole('button', {
+      name: /beef/i,
+    });
     userEvent.click(categoryBeefButton);
-    expect(await screen.findByText(/beef and mustard pie/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/beef and mustard pie/i),
+    ).toBeInTheDocument();
   });
 
   it('Testa se ao clicar no filtro de categoria, as bebidas são filtradas', async () => {
@@ -76,7 +80,9 @@ describe('Testa a página de receitas', () => {
 
     expect(await screen.findByText(/^gg$/im)).toBeInTheDocument();
 
-    const categoryCocktailButton = await screen.findByRole('button', { name: /cocktail/i });
+    const categoryCocktailButton = await screen.findByRole('button', {
+      name: /cocktail/i,
+    });
     userEvent.click(categoryCocktailButton);
     expect(await screen.findByText(/155 belmont/i)).toBeInTheDocument();
   });
@@ -94,11 +100,17 @@ describe('Testa a página de receitas', () => {
 
     expect(await screen.findByText(/corba/i)).toBeInTheDocument();
 
-    const categoryBeefButton = await screen.findByRole('button', { name: /beef/i });
+    const categoryBeefButton = await screen.findByRole('button', {
+      name: /beef/i,
+    });
     userEvent.click(categoryBeefButton);
-    expect(await screen.findByText(/beef and mustard pie/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/beef and mustard pie/i),
+    ).toBeInTheDocument();
 
-    const categoryAllButton = await screen.findByRole('button', { name: /all/i });
+    const categoryAllButton = await screen.findByRole('button', {
+      name: /all/i,
+    });
     userEvent.click(categoryAllButton);
     expect(await screen.findByText(/corba/i)).toBeInTheDocument();
   });
@@ -116,9 +128,13 @@ describe('Testa a página de receitas', () => {
 
     expect(await screen.findByText(/corba/i)).toBeInTheDocument();
 
-    const categoryBeefButton = await screen.findByRole('button', { name: /beef/i });
+    const categoryBeefButton = await screen.findByRole('button', {
+      name: /beef/i,
+    });
     userEvent.click(categoryBeefButton);
-    expect(await screen.findByText(/beef and mustard pie/i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/beef and mustard pie/i),
+    ).toBeInTheDocument();
 
     userEvent.click(categoryBeefButton);
     expect(await screen.findByText(/corba/i)).toBeInTheDocument();

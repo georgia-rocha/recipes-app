@@ -49,7 +49,7 @@ export default function Recipes({ match }) {
   return (
     <>
       <Header title={ match.path === '/meals' ? 'Meals' : 'Drinks' } />
-      <div>
+      <div className="mb-14">
         {match.path === '/meals' ? (
           <>
             <Buttons categories={ categories.meals } handleClick={ handleClick } />

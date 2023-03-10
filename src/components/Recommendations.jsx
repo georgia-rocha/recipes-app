@@ -9,7 +9,9 @@ export default function Recommendations({ recipes }) {
       {recipes.slice(0, maxRecommendations).map((recipe, index) => (
         <div key={ recipe.idDrink } data-testid={ `${index}-recommendation-card` }>
           <img src={ recipe.strDrinkThumb } alt={ recipe.strDrink } />
-          <h3 data-testid={ `${index}-recommendation-title` }>{recipe.strDrink}</h3>
+          <h3 data-testid={ `${index}-recommendation-title` }>
+            {recipe.strDrink}
+          </h3>
         </div>
       ))}
     </div>

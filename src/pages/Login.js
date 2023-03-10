@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContext from '../context/LoginContext';
 import logo from '../images/logo.svg';
-import tomate from '../images/tomate.png';
+import tomato from '../images/tomato.png';
 
-function Login() {
+export default function Login() {
   const history = useHistory();
   const [login, setLogin] = useState({
     email: '',
@@ -28,14 +28,21 @@ function Login() {
   };
 
   const handleClickLogin = () => {
-    console.log(login.email);
     localStorage.setItem('user', JSON.stringify({ email: login.email }));
     history.push('/meals');
   };
 
+  const styleButton = () => {
+    const defaultStyle = (
+      'bg-yellow text-white w-full py-2 rounded-md font-bold uppercase'
+    );
+    const disabledStyle = `${defaultStyle} opacity-50 cursor-not-allowed`;
+    return btnLogin ? disabledStyle : defaultStyle;
+  };
+
   return (
     <main className="min-h-screen flex flex-col items-center">
-      <div className="bg-blue h-[422px]">
+      <div className="bg-blue h-[422px] w-full">
         <img
           src={ logo }
           alt=""
@@ -43,15 +50,16 @@ function Login() {
           className="mx-auto relative top-24"
         />
         <img
-          src={ tomate }
+          src={ tomato }
           alt=""
-          className="relative top-16 drop-shadow-lg"
-          width="375"
+          className="relative top-16 drop-shadow-lg w-full"
         />
       </div>
-      <div className="relative top-28 w-3/4">
-        <h1 className="uppercase text-center text-blue text-xl italic">Login</h1>
-        <form className="flex flex-col justify-between items-center space-y-2">
+      <div className="relative top-24 w-3/4">
+        <h1 className="uppercase text-center text-blue text-xl italic">
+          Login
+        </h1>
+        <form className="flex flex-col justify-between items-center space-y-2 pb-8">
           <input
             type="email"
             placeholder="Digite seu email"
@@ -71,11 +79,11 @@ function Login() {
             className="w-full border py-2 px-3 rounded-md placeholder:text-blue/50"
           />
           <button
-            type="submit"
+            type="button"
             data-testid="login-submit-btn"
             disabled={ btnLogin }
             onClick={ handleClickLogin }
-            className="bg-yellow text-white w-full py-2 rounded-md font-bold uppercase"
+            className={ styleButton() }
           >
             Enter
           </button>
@@ -84,5 +92,3 @@ function Login() {
     </main>
   );
 }
-
-export default Login;

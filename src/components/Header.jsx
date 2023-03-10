@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import LogoTitle from './header/LogoTitle';
+import HeaderIcons from './header/HeaderIcons';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
 
-function Header({ title, printIcon = true }) {
+export default function Header({ title, printIcon = true }) {
   const [btnSearch, setBtnSearch] = useState(false);
 
   const handleClick = () => {
@@ -15,42 +16,51 @@ function Header({ title, printIcon = true }) {
     }
   };
 
+  const displayTitleIcon = (type) => {
+    switch (type) {
+    case 'Meals':
+      return <img src={ mealIcon } alt="meals icon" className="h-10 mt-2" />;
+
+    case 'Drinks':
+      return <img src={ drinkIcon } alt="drinks icon" className="h-10 mt-2" />;
+
+    default:
+      break;
+    }
+  };
+
   return (
-    <header className="w-full h-20 flex flex-col sticky" data-testid="header">
-      <div className="flex h-14 justify-between">
-        <h2>
-          RECIPES
-          <span>app</span>
-        </h2>
-        <Link to="/profile">
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="profileIcon" />
-        </Link>
-        {
-          printIcon && (
-            <button
-              type="button"
-              className=""
-              onClick={ () => handleClick() }
-            >
-              <img src={ searchIcon } alt="searchIcon" data-testid="search-top-btn" />
-            </button>)
-        }
-      </div>
-      <h1
-        data-testid="page-title"
+    <header>
+      <nav
+        className="flex flex-col fixed top-0 bg-yellow px-3 w-full"
+        data-testid="header"
       >
-        { title }
-      </h1>
-      {
-        btnSearch && <input type="text" data-testid="search-input" />
-      }
+        <div className="flex py-1 justify-between items-center">
+          <LogoTitle />
+          <HeaderIcons handleClick={ handleClick } printIcon={ printIcon } />
+        </div>
+      </nav>
+      <div className="py-3 px-3 flex flex-col space-y-1 -mb-6 mt-12">
+        {displayTitleIcon(title)}
+        <h1
+          data-testid="page-title"
+          className="text-center text-blue uppercase font-bold tracking-wider p-2"
+        >
+          {title}
+        </h1>
+        {btnSearch && (
+          <input
+            type="text"
+            data-testid="search-input"
+            className="py-1 px-2 border-[1px] border-blue rounded-md mb-3"
+          />
+        )}
+      </div>
     </header>
   );
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  printIcon: PropTypes.bool.isRequired,
+  printIcon: PropTypes.bool,
 };
-
-export default Header;
