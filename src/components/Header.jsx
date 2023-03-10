@@ -31,13 +31,16 @@ export default function Header({ title, printIcon = true }) {
 
   return (
     <header>
-      <nav className="flex flex-col sticky bg-yellow px-3" data-testid="header">
+      <nav
+        className="flex flex-col fixed top-0 bg-yellow px-3 w-full"
+        data-testid="header"
+      >
         <div className="flex py-1 justify-between items-center">
           <LogoTitle />
           <HeaderIcons handleClick={ handleClick } printIcon={ printIcon } />
         </div>
       </nav>
-      <div className="py-2 px-3 flex flex-col space-y-1">
+      <div className="py-3 px-3 flex flex-col space-y-1 -mb-6 mt-12">
         {displayTitleIcon(title)}
         <h1
           data-testid="page-title"
@@ -49,7 +52,7 @@ export default function Header({ title, printIcon = true }) {
           <input
             type="text"
             data-testid="search-input"
-            className="py-1 px-2 border-[1px] border-blue rounded-md"
+            className="py-1 px-2 border-[1px] border-blue rounded-md mb-3"
           />
         )}
       </div>
