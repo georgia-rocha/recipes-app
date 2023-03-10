@@ -20,15 +20,16 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   };
 
   useEffect(() => {
-    const { pathname } = window.location;
-    const type = pathname.split('/')[1];
-    const id = pathname.split('/')[2];
-
     const inProgressRecipes = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     );
-
     if (inProgressRecipes) {
+      const { pathname } = window.location;
+
+      const type = pathname.split('/')[1];
+      if (!inProgressRecipes[type]) return;
+
+      const id = pathname.split('/')[2];
       const currentFinishedSteps = inProgressRecipes[type][id];
       setFinishedSteps(currentFinishedSteps);
     }
