@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import MealDetails from '../components/MealDetails';
 import DrinkDetails from '../components/DrinkDetails';
 import { fetchRecipesById } from '../helpers/fetchApi';
-import FinishRecipeButton from '../components/FinishRecipeButton';
 
 // Página de detalhes da receita
 export default function RecipeDetails({ isRecipeStarted = false }) {
@@ -27,18 +26,12 @@ export default function RecipeDetails({ isRecipeStarted = false }) {
 
   if (pathname.includes('meals')) {
     return (
-      <>
-        <MealDetails recipe={ recipeDetails } />
-        {isRecipeStarted && <FinishRecipeButton />}
-      </>
+      <MealDetails recipe={ recipeDetails } isRecipeStarted={ isRecipeStarted } />
     );
   }
 
   return (
-    <>
-      <DrinkDetails recipe={ recipeDetails } />
-      {isRecipeStarted && <FinishRecipeButton />}
-    </>
+    <DrinkDetails recipe={ recipeDetails } isRecipeStarted={ isRecipeStarted } />
   );
 }
 
