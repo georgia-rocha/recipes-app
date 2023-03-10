@@ -71,6 +71,7 @@ function RecommendationsDrinks() {
             type="button"
             data-testid="start-recipe-btn"
             className="btn btn-start-recipe btn-start"
+
           >
             Start Recipe
           </button>
