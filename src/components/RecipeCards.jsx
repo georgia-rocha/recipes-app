@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 Ele recebe um array de objetos com as receitas e o tipo de receita (Meal ou Drink) e renderiza os cards com as informações de cada receita.
 Clicar em um card direciona para a página de detalhes da receita. */
 export default function RecipeCards({ recipes, recipeType }) {
-  if (!recipes) return <p>Nenhuma receita encontrada</p>;
+  if (!recipes) {
+    return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+  }
+  const onze = 11;
   return (
     <div>
-      {recipes.map((recipe, index) => (
+      {recipes.filter((_recipe, index) => index <= onze).map((recipe, index) => (
         <div
           key={ recipe[`id${recipeType}`] }
           data-testid={ `${index}-recipe-card` }

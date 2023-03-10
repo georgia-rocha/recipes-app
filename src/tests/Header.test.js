@@ -29,6 +29,7 @@ describe('Testando o component Header', () => {
     waitFor(() => {
       const inputSearh = screen.getByTestId('search-input');
       expect(inputSearh).toBeInTheDocument();
+      userEvent.type(inputSearh, 'chicken');
       userEvent.click(search);
       expect(inputSearh).not.toBeInTheDocument();
     });

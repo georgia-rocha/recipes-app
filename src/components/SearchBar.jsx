@@ -26,6 +26,7 @@ function SearchBar() {
 
   const handleClick = async () => {
     const { location: { pathname } } = history;
+    console.log(pathname);
     const firstLetter = 'first-letter';
     const recipesPage = pathname.includes('meal') ? 'meal' : 'cocktail';
     if (search.length !== 1 && filter === firstLetter) {
@@ -33,7 +34,11 @@ function SearchBar() {
     }
     const endpointFirstLetter = `https://www.the${recipesPage}db.com/api/json/v1/1/${getFilter()}=${search}`;
     const responseApi = await getApi(endpointFirstLetter);
-    console.log(responseApi);
+    const recipesObject = recipesPage === 'meal' ? 'meals' : 'drinks';
+    const idRecipes = recipesPage === 'meal' ? 'idMeal' : 'idDrink';
+    if (responseApi[recipesObject]?.length === 1) {
+      history.push(`${recipesObject}/${responseApi[recipesObject][0][idRecipes]}`);
+    }
     setRecipes(responseApi);
   };
 

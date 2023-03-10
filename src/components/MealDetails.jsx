@@ -8,6 +8,7 @@ import Recommendations from './Recommendations';
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe }) {
   const { recipes } = useContext(RecipesContext);
+  console.log(recipes);
   const meal = recipe;
   const embedId = meal.strYoutube?.split('=')[1];
 
