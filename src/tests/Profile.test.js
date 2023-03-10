@@ -11,11 +11,15 @@ describe('Testa a page de Profile', () => {
       'user',
       JSON.stringify({ email: 'teste@teste.com' }),
     );
+
     renderWithRouter(
       <RecipesProvider>
         <Profile />
       </RecipesProvider>,
     );
+
+    renderWithRouter(<Profile />);
+
 
     const header = screen.getByTestId('header');
     const email = screen.getByTestId('profile-email');
@@ -34,6 +38,7 @@ describe('Testa a page de Profile', () => {
     expect(footer).toBeInTheDocument();
   });
 
+
   it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', async () => {
     const { history } = renderWithRouter(
       <RecipesProvider>
@@ -41,12 +46,17 @@ describe('Testa a page de Profile', () => {
       </RecipesProvider>,
     );
 
+  it('Testa se ao clicar no button Done Recipes o user é redirecionado corretamente', () => {
+    const { history } = renderWithRouter(<Profile />);
+
+
     const btnDoneRecipes = screen.getByTestId('profile-done-btn');
     userEvent.click(btnDoneRecipes);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/done-recipes');
     });
   });
+
 
   it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', async () => {
     const { history } = renderWithRouter(
@@ -55,12 +65,17 @@ describe('Testa a page de Profile', () => {
       </RecipesProvider>,
     );
 
+  it('Testa se ao clicar no button Favorite Recipes o user é redirecionado corretamente', () => {
+    const { history } = renderWithRouter(<Profile />);
+
+
     const btnFavorites = screen.getByTestId('profile-favorite-btn');
     userEvent.click(btnFavorites);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/favorite-recipes');
     });
   });
+
 
   it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', async () => {
     const { history } = renderWithRouter(
@@ -68,9 +83,13 @@ describe('Testa a page de Profile', () => {
         <Profile />
       </RecipesProvider>,
     );
+
+  it('Testa se ao clicar no button Logout o user é redirecionado corretamente para tela de login e o localStorage é limpo', () => {
+    const { history } = renderWithRouter(<Profile />);
+
     const btnLogout = screen.getByTestId('profile-logout-btn');
     userEvent.click(btnLogout);
-    await waitFor(() => {
+    waitFor(() => {
       expect(history.location.pathname).toBe('/');
     });
   });

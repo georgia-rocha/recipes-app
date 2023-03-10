@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Profile() {
+export default function Profile() {
   const history = useHistory();
   const emailLogin = JSON.parse(localStorage.getItem('user'));
   console.log(emailLogin);
@@ -22,33 +22,33 @@ function Profile() {
   };
 
   return (
-    <div>
-      <Header title="Profile" printIcon={ false } />
-      <p data-testid="profile-email">{ emailLogin?.email }</p>
-      <button
-        type="button"
-        data-testid="profile-done-btn"
-        onClick={ redirectDoneRecipes }
-      >
-        Done Recipes
-      </button>
-      <button
-        type="button"
-        data-testid="profile-favorite-btn"
-        onClick={ redirectFavorites }
-      >
-        Favorite Recipes
-      </button>
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ handleLogout }
-      >
-        Logout
-      </button>
+    <>
+      <div className="mb-14">
+        <Header title="Profile" printIcon={ false } />
+        <p data-testid="profile-email">{emailLogin?.email}</p>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ redirectDoneRecipes }
+        >
+          Done Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ redirectFavorites }
+        >
+          Favorite Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ handleLogout }
+        >
+          Logout
+        </button>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
-
-export default Profile;

@@ -28,11 +28,15 @@ export const fetchCategories = async () => {
 
 export const fetchRecipesByCategory = async (type, category) => {
   if (type === 'meals') {
-    const mealsResponse = await fetch(`${MEAL_RECIPES_BY_CATEGORY_URL}${category}`);
+    const mealsResponse = await fetch(
+      `${MEAL_RECIPES_BY_CATEGORY_URL}${category}`,
+    );
     const mealsData = await mealsResponse.json();
     return mealsData;
   }
-  const drinksResponse = await fetch(`${DRINK_RECIPES_BY_CATEGORY_URL}${category}`);
+  const drinksResponse = await fetch(
+    `${DRINK_RECIPES_BY_CATEGORY_URL}${category}`,
+  );
   const drinksData = await drinksResponse.json();
   return drinksData;
 };

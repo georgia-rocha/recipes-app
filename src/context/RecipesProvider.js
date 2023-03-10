@@ -6,11 +6,9 @@ import { FIRST_12_RECIPES, FIRST_5_CATEGORIES } from '../helpers/constants';
 
 // Passa o contexto para os componentes filhos
 export default function RecipesProvider({ children }) {
-  const [recipes, setRecipes] = useState({
-    meals: [],
-    drinks: [],
-  });
-  const [categories, setCategories] = useState({
+  const [recipes, setRecipes] = useState({ meals: [], drinks: [] });
+  const [categories, setCategories] = useState({ meals: [], drinks: [] });
+  const [startedRecipes, setStartedRecipes] = useState({
     meals: [],
     drinks: [],
   });
@@ -46,12 +44,19 @@ export default function RecipesProvider({ children }) {
       recipes,
       setRecipes,
       categories,
+
       search,
       setSearch,
       filter,
       setFilter,
     }),
     [recipes, setRecipes, categories, search, setSearch, filter, setFilter],
+
+      startedRecipes,
+      setStartedRecipes,
+    }),
+    [recipes, categories, startedRecipes],
+
   );
 
   return (

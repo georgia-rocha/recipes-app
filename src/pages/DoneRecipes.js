@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-function DoneRecipes() {
+export default function DoneRecipes() {
   return (
     <div>
       <Header title="Done Recipes" printIcon={ false } />
@@ -11,5 +11,3 @@ function DoneRecipes() {
     </div>
   );
 }
-
-export default DoneRecipes;

@@ -39,7 +39,7 @@ export default function Recipes({ match }) {
 
   // Salva no estado a categoria clicada ou 'All' se clicar na mesma categoria (desseleciona)
   const handleClick = async (category) => {
-    if (selectedCategory === 'All' || selectedCategory !== category) {
+    if (selectedCategory !== category) {
       setSelectedCategory(category);
       return;
     }
@@ -49,7 +49,7 @@ export default function Recipes({ match }) {
   return (
     <>
       <Header title={ match.path === '/meals' ? 'Meals' : 'Drinks' } />
-      <div>
+      <div className="mb-14">
         {match.path === '/meals' ? (
           <>
             <Buttons categories={ categories.meals } handleClick={ handleClick } />
