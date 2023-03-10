@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -26,6 +26,13 @@ export default function Profile() {
       <div className="mb-14">
         <Header title="Profile" printIcon={ false } />
         <p data-testid="profile-email">{emailLogin?.email}</p>
+    <div>
+      <Header title="Profile" printIcon={ false } />
+      <h3 data-testid="h3rofile-email">
+        { emailLogin?.email }
+      </h3>
+
+      <Link to="/done-recipes">
         <button
           type="button"
           data-testid="profile-done-btn"
@@ -33,6 +40,12 @@ export default function Profile() {
         >
           Done Recipes
         </button>
+<<<<<<< HEAD
+=======
+      </Link>
+
+      <Link to="/favorite-recipes">
+>>>>>>> main-group-1-cria-tela-detalhes-2
         <button
           type="button"
           data-testid="profile-favorite-btn"
@@ -40,6 +53,12 @@ export default function Profile() {
         >
           Favorite Recipes
         </button>
+<<<<<<< HEAD
+=======
+      </Link>
+
+      <Link to="/">
+>>>>>>> main-group-1-cria-tela-detalhes-2
         <button
           type="button"
           data-testid="profile-logout-btn"
@@ -47,7 +66,12 @@ export default function Profile() {
         >
           Logout
         </button>
+<<<<<<< HEAD
       </div>
+=======
+      </Link>
+
+>>>>>>> main-group-1-cria-tela-detalhes-2
       <Footer />
     </>
   );

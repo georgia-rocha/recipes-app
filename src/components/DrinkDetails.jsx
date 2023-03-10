@@ -4,6 +4,7 @@ import RecipeIngredients from './RecipeIngredients';
 import RecipesContext from '../context/RecipesContext';
 import Recommendations from './Recommendations';
 import RecipeButtons from './RecipeButtons';
+import RecommendationsMeals from './RecommendationsMeals';
 
 // Renderiza os detalhes da receita de bebida
 export default function DrinkDetails({ recipe, isRecipeStarted }) {
@@ -25,7 +26,7 @@ export default function DrinkDetails({ recipe, isRecipeStarted }) {
       <h2>Instruções</h2>
       <p data-testid="instructions">{drink.strInstructions}</p>
       <h2>Recomendações</h2>
-      <Recommendations recipes={ recipes.meals } />
+      <RecommendationsMeals recipes={ recipes.meals } />
     </div>
   );
 }

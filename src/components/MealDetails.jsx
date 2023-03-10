@@ -5,6 +5,7 @@ import YouTubeEmbed from './YouTubeEmbed';
 import RecipesContext from '../context/RecipesContext';
 import Recommendations from './Recommendations';
 import RecipeButtons from './RecipeButtons';
+import RecommendationsDrinks from './RecommendationsDrinks';
 
 // Renderiza os detalhes da receita de comida
 export default function MealDetails({ recipe, isRecipeStarted }) {
@@ -32,7 +33,7 @@ export default function MealDetails({ recipe, isRecipeStarted }) {
       <p data-testid="instructions">{meal.strInstructions}</p>
       <YouTubeEmbed embedId={ embedId } />
       <h2>Recomendações</h2>
-      <Recommendations recipes={ recipes.drinks } />
+      <RecommendationsDrinks recipes={ recipes.drinks } />
     </div>
   );
 }

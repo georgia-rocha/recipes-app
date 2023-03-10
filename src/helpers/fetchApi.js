@@ -8,6 +8,7 @@ import {
   DRINK_RECIPES_BY_CATEGORY_URL,
   MEAL_RECIPES_BY_ID_URL,
   DRINK_RECIPES_BY_ID_URL,
+
 } from './constants';
 
 export const fetchRecipes = async () => {
@@ -79,3 +80,20 @@ export const filterDrinks = async (endpoint) => {
     return null;
   }
 };
+const ZERO = 0;
+const TWELVE = 12;
+
+export async function fetchMeals12Cards() {
+  const fetchData = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const data = await fetchData.json();
+  const twelveMeals = data.meals.slice(ZERO, TWELVE);
+
+  return twelveMeals;
+}
+export async function fetchDrinks12Cards() {
+  const fetchData = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const data = await fetchData.json();
+  const twelveDrinks = data.drinks.slice(ZERO, TWELVE);
+
+  return twelveDrinks;
+}

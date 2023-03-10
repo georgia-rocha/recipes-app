@@ -34,6 +34,8 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
       setFinishedSteps(currentFinishedSteps);
     }
   }, []);
+export default function RecipeIngredients({ recipe }) {
+  // console.table(recipe);
 
   const getIngredients = (recipeDetails) => {
     const ingredients = [];
