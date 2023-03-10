@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
-export default function FinishRecipeButton({ isDisabled }) {
-  const history = useHistory();
-
+export default function FinishRecipeButton({ isDisabled, finishRecipe }) {
   return (
     <button
       data-testid="finish-recipe-btn"
       disabled={ isDisabled }
-      onClick={ () => history.push('/done-recipes') }
+      onClick={ finishRecipe }
     >
       Finish
     </button>
@@ -17,5 +14,6 @@ export default function FinishRecipeButton({ isDisabled }) {
 }
 
 FinishRecipeButton.propTypes = {
-  isDisabled: PropTypes.bool.isRequired,
-};
+  isDisabled: PropTypes.bool,
+  finishRecipe: PropTypes.func,
+}.isRequired;
