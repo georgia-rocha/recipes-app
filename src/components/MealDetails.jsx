@@ -24,7 +24,7 @@ export default function MealDetails({ recipe, isRecipeStarted }) {
     console.log(recipeInProgress);
     console.log(id);
     if (recipeInProgress) {
-      history.push(`/meals/${id}in-progress`);
+      history.push(`/meals/${id}/in-progress`);
     } else {
       setStartRecipe(true);
       setRecipeInProgress(true);
