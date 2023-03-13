@@ -9,13 +9,22 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   const history = useHistory();
 
   const updateFinishedStepsOnLocalStorage = (updatedSteps) => {
+    if (!localStorage.getItem('inProgressRecipes')) {
+      const inProgressRecipes = {
+        meals: {},
+        drinks: {},
+      };
+      localStorage.setItem(
+        'inProgressRecipes',
+        JSON.stringify(inProgressRecipes),
+      );
+    }
     const finishedStepsObject = {
       ...JSON.parse(localStorage.getItem('inProgressRecipes')),
       [recipe.idMeal ? 'meals' : 'drinks']: {
         [recipe.idMeal || recipe.idDrink]: [...updatedSteps],
       },
     };
-
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(finishedStepsObject),
@@ -23,13 +32,16 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   };
 
   useEffect(() => {
+    const { pathname } = window.location;
+    const type = pathname.split('/')[1];
+    const id = pathname.split('/')[2];
+
     const inProgressRecipes = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     );
+
+    console.log(inProgressRecipes);
     if (inProgressRecipes) {
-      const { pathname } = window.location;
-      const type = pathname.split('/')[1];
-      const id = pathname.split('/')[2];
       const currentFinishedSteps = inProgressRecipes[type][id];
       if (inProgressRecipes[type][id] !== undefined) {
         setFinishedSteps(currentFinishedSteps);
