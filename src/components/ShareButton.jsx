@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ShareButton({ testId = '', type = '', id = '' }) {
+export default function ShareButton({ testId, type = '', id = '' }) {
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   const copyLink = () => {
@@ -24,8 +24,8 @@ export default function ShareButton({ testId = '', type = '', id = '' }) {
 
   return (
     <>
-      <button type="button" onClick={ copyLink } data-testid={ testId }>
-        <img src={ shareIcon } alt="" data-testid="share-btn" />
+      <button type="button" onClick={ copyLink }>
+        <img src={ shareIcon } alt="" data-testid={ testId } />
         <p>Compartilhar</p>
       </button>
       {isLinkCopied && <p>Link copied!</p>}
@@ -34,7 +34,7 @@ export default function ShareButton({ testId = '', type = '', id = '' }) {
 }
 
 ShareButton.propTypes = {
-  testId: PropTypes.string,
+  testId: PropTypes.string.isRequired,
   type: PropTypes.string,
   id: PropTypes.string,
 };

@@ -63,7 +63,7 @@ export default function RecipeButtons({ recipe }) {
         />
         <p>Favoritar</p>
       </button>
-      <ShareButton />
+      <ShareButton testId="share-btn" />
     </div>
   );
 }

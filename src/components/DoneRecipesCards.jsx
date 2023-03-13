@@ -2,12 +2,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ShareButton from './ShareButton';
 
-export default function DoneRecipesCards({ doneRecipes }) {
+export default function DoneRecipesCards({ doneRecipes, filter }) {
   const isMeal = (type) => type === 'meal';
+
+  const filterRecipes = (recipe) => {
+    if (filter === 'all') return true;
+    if (filter === 'meals') return isMeal(recipe.type);
+    if (filter === 'drinks') return !isMeal(recipe.type);
+    return false;
+  };
 
   return (
     <div>
-      {doneRecipes.map(
+      {doneRecipes.filter(filterRecipes).map(
         (
           {
             id,
@@ -56,4 +63,5 @@ export default function DoneRecipesCards({ doneRecipes }) {
 
 DoneRecipesCards.propTypes = {
   doneRecipes: PropTypes.arrayOf(PropTypes.shape({})),
+  filter: PropTypes.string,
 }.isRequired;

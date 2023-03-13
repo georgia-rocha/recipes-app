@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import mealIcon from '../images/mealIcon.svg';
-import drinkIcon from '../images/drinkIcon.svg';
-import allRecipesIcon from '../images/allRecipesIcon.svg';
 import DoneRecipesCards from '../components/DoneRecipesCards';
+import DoneRecipesButtons from '../components/DoneRecipesButtons';
 
 export default function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     const getLocalStorage = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -18,21 +17,8 @@ export default function DoneRecipes() {
     <div>
       <Header title="Done Recipes" printIcon={ false } />
       <main className="mb-14">
-        <div>
-          <button type="button" data-testid="filter-by-all-btn">
-            <img src={ allRecipesIcon } alt="All" />
-            <p>All</p>
-          </button>
-          <button type="button" data-testid="filter-by-meal-btn">
-            <img src={ mealIcon } alt="Meals" />
-            <p>Meals</p>
-          </button>
-          <button type="button" data-testid="filter-by-drink-btn">
-            <img src={ drinkIcon } alt="Drink" />
-            <p>Drinks</p>
-          </button>
-        </div>
-        <DoneRecipesCards doneRecipes={ doneRecipes } />
+        <DoneRecipesButtons setFilter={ setFilter } />
+        <DoneRecipesCards doneRecipes={ doneRecipes } filter={ filter } />
       </main>
       <Footer />
     </div>
