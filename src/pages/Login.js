@@ -29,6 +29,7 @@ export default function Login() {
 
   const handleClickLogin = () => {
     localStorage.setItem('user', JSON.stringify({ email: login.email }));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ drinks: {}, meals: {} }));
     history.push('/meals');
   };
 

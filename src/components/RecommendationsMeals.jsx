@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { useHistory, Redirect } from 'react-router-dom';
 import { fetchMeals12Cards } from '../helpers/fetchApi';
 import '../styles/buttonStart.scss';
 
@@ -8,9 +7,6 @@ const maxRecommendations = 6;
 
 export default function RecommendationsMeals() {
   const [meals, setMeals] = useState([]);
-  const [recipeInProgress, setRecipeInProgress] = useState(false);
-  const [recipeDone, setRecipeDone] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     const fetch = async () => {
@@ -21,26 +17,6 @@ export default function RecommendationsMeals() {
     fetch();
   }, []);
 
-  useEffect(() => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes && inProgressRecipes.meals) {
-      inProgressRecipes.meals.forEach((recipeId) => {
-        if (recipeId === meals[0].idMeal) {
-          setRecipeInProgress(true);
-        }
-      });
-    }
-
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes) {
-      doneRecipes.forEach((recipe) => {
-        if (recipe.id === meals[0]?.idMeal) {
-          setRecipeDone(true);
-        }
-      });
-    }
-  }, [meals]);
-
   const IMAGE_TWO = meals.reduce((acc, cur, i) => {
     if (i % 2 === 0) {
       acc.push([cur]);
@@ -49,22 +25,6 @@ export default function RecommendationsMeals() {
     }
     return acc;
   }, []);
-
-  const handleStartRecipeClick = () => {
-    if (recipeInProgress) {
-      history.push('/receitas/em-progresso');
-    } else {
-      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      || {};
-      const { meals: mealsInProgress } = inProgressRecipes;
-      const newInProgressRecipes = {
-        ...inProgressRecipes,
-        meals: [...(mealsInProgress || []), meals[0].idMeal],
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
-      history.push(`/comidas/${meals[0].idMeal}/in-progress`);
-    }
-  };
 
   return (
     <div>
@@ -105,21 +65,6 @@ export default function RecommendationsMeals() {
             </Carousel.Item>
           ))}
         </Carousel>
-        {recipeDone ? null : (
-          <div>
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="btn btn-start-recipe btn-start"
-              onClick={ handleStartRecipeClick }
-            >
-              {recipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
-            </button>
-          </div>
-        )}
-        {recipeInProgress && (
-          <Redirect to={ `/bebidas/${meals[0].idMeal}/in-progress` } />
-        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { Redirect, useHistory } from 'react-router-dom';
+// import { Redirect, useHistory } from 'react-router-dom';
 import { fetchDrinks12Cards } from '../helpers/fetchApi';
 import '../styles/buttonStart.scss';
 
@@ -8,9 +8,9 @@ const maxRecommendations = 6;
 
 function RecommendationsDrinks() {
   const [drinks, setDrink] = useState([]);
-  const [recipeInProgress, setRecipeInProgress] = useState(null);
-  const [recipeDone, setRecipeDone] = useState(false);
-  const history = useHistory();
+  // const [recipeInProgress, setRecipeInProgress] = useState(null);
+  // const [recipeDone, setRecipeDone] = useState(false);
+  // const history = useHistory();
 
   useEffect(() => {
     const fetch = async () => {
@@ -21,24 +21,24 @@ function RecommendationsDrinks() {
     fetch();
   }, []);
 
-  useEffect(() => {
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes) {
-      doneRecipes.forEach((recipe) => {
-        if (recipe.id === drinks[0]?.idDrink) {
-          setRecipeDone(true);
-        }
-      });
-    }
+  // useEffect(() => {
+  //   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  //   if (doneRecipes) {
+  //     doneRecipes.forEach((recipe) => {
+  //       if (recipe.id === drinks[0].idDrink) {
+  //         setRecipeDone(true);
+  //       }
+  //     });
+  //   }
 
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes) {
-      const recipeInProgressId = inProgressRecipes.cocktails[drinks[0].idDrink];
-      if (recipeInProgressId) {
-        setRecipeInProgress(recipeInProgressId);
-      }
-    }
-  }, [drinks]);
+  //   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   if (inProgressRecipes) {
+  //     const recipeInProgressId = inProgressRecipes.cocktails[drinks[0]];
+  //     if (recipeInProgressId) {
+  //       setRecipeInProgress(recipeInProgressId);
+  //     }
+  //   }
+  // }, [drinks]);
 
   const IMAGE_TWO = drinks.reduce((acc, cur, i) => {
     if (i % 2 === 0) {
@@ -49,18 +49,18 @@ function RecommendationsDrinks() {
     return acc;
   }, []);
 
-  const handleStartRecipe = () => {
-    if (recipeInProgress) {
-      history.push(`/bebidas/${drinks[0].idDrink}/in-progress`);
-    } else {
-      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-|| {};
-      inProgressRecipes.cocktails = { ...inProgressRecipes.cocktails,
-        [drinks[0].idDrink]: Date.now() };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-      history.push(`/bebidas/${drinks[0].idDrink}/in-progress`);
-    }
-  };
+  //   const handleStartRecipe = () => {
+  //     if (recipeInProgress) {
+  //       history.push(`/bebidas/${drinks[0].idDrink}/in-progress`);
+  //     } else {
+  //       const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+  // || {};
+  //       inProgressRecipes.cocktails = { ...inProgressRecipes.cocktails,
+  //         [drinks[0].idDrink]: Date.now() };
+  //       localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  //       history.push(`/bebidas/${drinks[0].idDrink}/in-progress`);
+  //     }
+  // };
 
   return (
     <div>
@@ -101,21 +101,18 @@ function RecommendationsDrinks() {
             </Carousel.Item>
           ))}
         </Carousel>
-        {recipeDone ? null : (
-          <div>
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="btn btn-start-recipe btn-start"
-              onClick={ handleStartRecipe }
-            >
-              {recipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
-            </button>
-          </div>
-        )}
-        {recipeInProgress && (
-          <Redirect to={ `/bebidas/${drinks[0].idDrink}/in-progress` } />
-        )}
+        {/* {recipeDone ? null : ( */}
+        <div>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="btn btn-start-recipe btn-start"
+            // onClick={ handleStartRecipe }
+          >
+            Start Recipe
+
+          </button>
+        </div>
       </div>
     </div>
   );
