@@ -31,7 +31,7 @@ export default function RecommendationsMeals() {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes) {
       doneRecipes.forEach((recipe) => {
-        if (recipe.id === meals[0].idMeal) {
+        if (recipe.id === meals[0]?.idMeal) {
           setRecipeDone(true);
         }
       });
