@@ -6,7 +6,7 @@ export default function DoneRecipes() {
   return (
     <div>
       <Header title="Done Recipes" printIcon={ false } />
-      <h1>Test Done Recipes</h1>
+      <h1>Done Recipes</h1>
       <Footer />
     </div>
   );
