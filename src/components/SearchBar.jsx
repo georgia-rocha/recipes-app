@@ -1,17 +1,11 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
+import { getApi } from '../helpers/fetchApi';
 
 export default function SearchBar() {
   const { filter, setFilter, search, setRecipes } = useContext(RecipesContext);
   const history = useHistory();
-
-  const getApi = async (endpoint) => {
-    const response = await fetch(endpoint);
-    console.log(response);
-    const data = await response.json();
-    return data;
-  };
 
   const getFilter = () => {
     switch (filter) {

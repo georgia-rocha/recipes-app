@@ -100,3 +100,10 @@ export async function fetchDrinks12Cards() {
 
   return twelveDrinks;
 }
+
+export const getApi = async (endpoint) => {
+  const response = await fetch(endpoint);
+  console.log(response);
+  const data = await response.json();
+  return data;
+};
