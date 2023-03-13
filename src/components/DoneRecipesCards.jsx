@@ -7,10 +7,9 @@ export default function DoneRecipesCards({ doneRecipes, filter }) {
   const isMeal = (type) => type === 'meal';
 
   const filterRecipes = (recipe) => {
-    if (filter === 'all') return true;
     if (filter === 'meals') return isMeal(recipe.type);
     if (filter === 'drinks') return !isMeal(recipe.type);
-    return false;
+    return true;
   };
 
   return (
