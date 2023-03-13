@@ -17,27 +17,6 @@ export default function RecommendationsMeals() {
     fetch();
   }, []);
 
-  useEffect(() => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(inProgressRecipes);
-    if (inProgressRecipes && inProgressRecipes.meals) {
-      inProgressRecipes.meals.forEach((recipeId) => {
-        if (recipeId === meals[1]) {
-          setRecipeInProgress(true);
-        }
-      });
-    }
-
-    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipes) {
-      doneRecipes.forEach((recipe) => {
-        if (recipe.id === meals[0]?.idMeal) {
-          setRecipeDone(true);
-        }
-      });
-    }
-  }, [meals]);
-
   const IMAGE_TWO = meals.reduce((acc, cur, i) => {
     if (i % 2 === 0) {
       acc.push([cur]);
