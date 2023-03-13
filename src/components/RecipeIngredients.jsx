@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import FinishRecipeButton from './FinishRecipeButton';
 import styles from '../styles/RecipeIngredients.module.scss';
@@ -28,13 +28,12 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
     );
     if (inProgressRecipes) {
       const { pathname } = window.location;
-
       const type = pathname.split('/')[1];
-      if (!inProgressRecipes[type]) return;
-
       const id = pathname.split('/')[2];
       const currentFinishedSteps = inProgressRecipes[type][id];
-      setFinishedSteps(currentFinishedSteps);
+      if (inProgressRecipes[type][id] !== undefined) {
+        setFinishedSteps(currentFinishedSteps);
+      }
     }
   }, []);
 
@@ -52,28 +51,27 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
     return ingredients;
   };
 
-  const isStepFinished = (step) => {
-    if (!isRecipeStarted) return false;
-    return finishedSteps.includes(step);
-  };
+  const isStepFinished = (step) => finishedSteps.includes(step);
 
   const toggleFinishedStep = (step) => {
     if (isStepFinished(step)) {
-      setFinishedSteps(
-        finishedSteps.filter((finishedStep) => finishedStep !== step),
+      const updatedSteps = finishedSteps.filter(
+        (finishedStep) => finishedStep !== step,
       );
+      setFinishedSteps(updatedSteps);
+      updateFinishedStepsOnLocalStorage(updatedSteps);
     } else {
       setFinishedSteps([...finishedSteps, step]);
+      updateFinishedStepsOnLocalStorage([...finishedSteps, step]);
     }
-    updateFinishedStepsOnLocalStorage([...finishedSteps, step]);
   };
 
-  const isRecipeFinished = () => {
+  const isRecipeFinished = useCallback(() => {
     const ingredients = getIngredients(recipe);
     const finishedStepsLength = finishedSteps.length;
     const ingredientsLength = ingredients.length;
     return finishedStepsLength === ingredientsLength;
-  };
+  }, [finishedSteps, recipe]);
 
   const finishRecipe = () => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -86,8 +84,8 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
       alcoholicOrNot: recipe.strAlcoholic || '',
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
-      doneDate: new Date().toLocaleDateString('pt-BR'),
-      tags: recipe.tags || [],
+      doneDate: new Date().toISOString(),
+      tags: recipe.strTags ? recipe.strTags.split(',') : [],
     };
 
     doneRecipes.push(newDoneRecipe);
@@ -104,7 +102,7 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
             data-testid={ `${ingredient.index}-ingredient-name-and-measure` }
             id={ ingredient.index }
           >
-            {isRecipeStarted && (
+            {isRecipeStarted ? (
               <label
                 htmlFor={ ingredient.name }
                 data-testid={ `${ingredient.index}-ingredient-step` }
@@ -125,6 +123,12 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
                   {ingredient.measure}
                 </span>
               </label>
+            ) : (
+              <span>
+                {ingredient.name}
+                {' '}
+                {ingredient.measure}
+              </span>
             )}
           </li>
         ))}

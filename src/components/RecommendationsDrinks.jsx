@@ -25,7 +25,7 @@ function RecommendationsDrinks() {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipes) {
       doneRecipes.forEach((recipe) => {
-        if (recipe.id === drinks[0].idDrink) {
+        if (recipe.id === drinks[0]?.idDrink) {
           setRecipeDone(true);
         }
       });
