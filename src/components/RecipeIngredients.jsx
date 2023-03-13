@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import FinishRecipeButton from './FinishRecipeButton';
+import styles from '../styles/RecipeIngredients.module.scss';
 
 export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   const [finishedSteps, setFinishedSteps] = useState([]);
+  const history = useHistory();
 
   const updateFinishedStepsOnLocalStorage = (updatedSteps) => {
     const finishedStepsObject = {
@@ -67,9 +70,29 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
 
   const isRecipeFinished = () => {
     const ingredients = getIngredients(recipe);
-    const finishedStepsLength = finishedSteps.length;
+    const finishedStepsLength = finishedSteps.length || 0;
     const ingredientsLength = ingredients.length;
     return finishedStepsLength === ingredientsLength;
+  };
+
+  const finishRecipe = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+
+    const newDoneRecipe = {
+      id: recipe.idMeal || recipe.idDrink,
+      nationality: recipe.strArea || '',
+      type: recipe.idMeal ? 'meal' : 'drink',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      doneDate: new Date().toLocaleDateString('pt-BR'),
+      tags: recipe.tags || [],
+    };
+
+    doneRecipes.push(newDoneRecipe);
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    history.push('/done-recipes');
   };
 
   return (
@@ -82,30 +105,35 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
             id={ ingredient.index }
           >
             {isRecipeStarted && (
-              <input
-                type="checkbox"
+              <label
+                htmlFor={ ingredient.name }
                 data-testid={ `${ingredient.index}-ingredient-step` }
-                onChange={ () => toggleFinishedStep(ingredient.index) }
-                checked={ isStepFinished(ingredient.index) }
-                className="mr-1"
-              />
+                className={
+                  isStepFinished(ingredient.index) ? styles.finished_step : ''
+                }
+              >
+                <input
+                  type="checkbox"
+                  onChange={ () => toggleFinishedStep(ingredient.index) }
+                  checked={ isStepFinished(ingredient.index) }
+                  className="mr-1"
+                  id={ ingredient.name }
+                />
+                <span>
+                  {ingredient.name}
+                  {' '}
+                  {ingredient.measure}
+                </span>
+              </label>
             )}
-            <span
-              className={
-                isStepFinished(ingredient.index)
-                  ? 'line-through decoration-solid decoration-black'
-                  : ''
-              }
-            >
-              {ingredient.name}
-              {' '}
-              {ingredient.measure}
-            </span>
           </li>
         ))}
       </ul>
       {isRecipeStarted && (
-        <FinishRecipeButton isDisabled={ !isRecipeFinished() } />
+        <FinishRecipeButton
+          isDisabled={ !isRecipeFinished() }
+          finishRecipe={ finishRecipe }
+        />
       )}
     </>
   );
