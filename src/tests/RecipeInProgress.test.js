@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
@@ -13,6 +14,8 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+const mealInProgressPath = '/meals/52977/in-progress';
+
 describe('Testa a página de receitas em progresso', () => {
   it('Testa se a página de comidas em progresso é renderizada e exibe as informações corretamente', async () => {
     const { history } = renderWithRouter(
@@ -22,10 +25,10 @@ describe('Testa a página de receitas em progresso', () => {
     );
 
     waitFor(() => {
-      history.push('/meals/52977/in-progress');
+      history.push(mealInProgressPath);
     });
 
-    expect(history.location.pathname).toBe('/meals/52977/in-progress');
+    expect(history.location.pathname).toBe(mealInProgressPath);
     expect(await screen.findByTestId(/recipe-title/i)).toBeInTheDocument();
     expect(await screen.findByTestId(/recipe-category/i)).toBeInTheDocument();
     expect(
@@ -47,5 +50,21 @@ describe('Testa a página de receitas em progresso', () => {
 
     expect(history.location.pathname).toBe('/drinks/15997/in-progress');
     expect(await screen.findByText(/^gg$/im)).toBeInTheDocument();
+  });
+
+  it.skip('Testa se os passos da receita em progresso são atualizados corretamente', async () => {
+    const { history } = renderWithRouter(
+      <RecipesProvider>
+        <App />
+      </RecipesProvider>,
+    );
+
+    waitFor(() => {
+      history.push(mealInProgressPath);
+    });
+
+    const checkbox = await screen.findByTestId(/0-ingredient-step/i);
+    userEvent.click(checkbox);
+    expect(await screen.findByTestId(/0-ingredient-step/i)).toHaveStyle('text-decoration: line-through solid rgb(0, 0, 0)');
   });
 });

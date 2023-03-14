@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router-dom';
 import RecipeIngredients from './RecipeIngredients';
 import YouTubeEmbed from './YouTubeEmbed';
 import RecipesContext from '../context/RecipesContext';
@@ -7,11 +8,29 @@ import RecipeButtons from './RecipeButtons';
 import RecommendationsDrinks from './RecommendationsDrinks';
 
 // Renderiza os detalhes da receita de comida
+
 export default function MealDetails({ recipe, isRecipeStarted }) {
   const { recipes } = useContext(RecipesContext);
-  console.log(recipes);
+  const history = useHistory();
+  const { pathname } = useLocation();
+  const [recipeInProgress, setRecipeInProgress] = useState([]);
+  const [startRecipe, setStartRecipe] = useState(false);
+  const id = pathname.split('/')[2];
+
   const meal = recipe;
   const embedId = meal.strYoutube?.split('=')[1];
+
+  const handleStartRecipeClick = () => {
+    console.log(recipeInProgress);
+    console.log(id);
+    if (recipeInProgress) {
+      history.push(`/meals/${id}/in-progress`);
+    } else {
+      setStartRecipe(true);
+      setRecipeInProgress(true);
+      history.push(`/meals/${id}/in-progress`);
+    }
+  };
 
   return (
     <div>
@@ -30,6 +49,18 @@ export default function MealDetails({ recipe, isRecipeStarted }) {
       <YouTubeEmbed embedId={ embedId } />
       <h2>Recomendações</h2>
       <RecommendationsDrinks recipes={ recipes.drinks } />
+      <div>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btn btn-start-recipe btn-start"
+          onClick={ handleStartRecipeClick }
+        >
+          {
+            startRecipe ? 'Continue Recipe' : 'Start Recipe'
+          }
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,18 +1,30 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import FinishRecipeButton from './FinishRecipeButton';
+import styles from '../styles/RecipeIngredients.module.scss';
 
 export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   const [finishedSteps, setFinishedSteps] = useState([]);
+  const history = useHistory();
 
   const updateFinishedStepsOnLocalStorage = (updatedSteps) => {
+    if (!localStorage.getItem('inProgressRecipes')) {
+      const inProgressRecipes = {
+        meals: {},
+        drinks: {},
+      };
+      localStorage.setItem(
+        'inProgressRecipes',
+        JSON.stringify(inProgressRecipes),
+      );
+    }
     const finishedStepsObject = {
       ...JSON.parse(localStorage.getItem('inProgressRecipes')),
       [recipe.idMeal ? 'meals' : 'drinks']: {
         [recipe.idMeal || recipe.idDrink]: [...updatedSteps],
       },
     };
-
     localStorage.setItem(
       'inProgressRecipes',
       JSON.stringify(finishedStepsObject),
@@ -20,18 +32,20 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
   };
 
   useEffect(() => {
+    const { pathname } = window.location;
+    const type = pathname.split('/')[1];
+    const id = pathname.split('/')[2];
+
     const inProgressRecipes = JSON.parse(
       localStorage.getItem('inProgressRecipes'),
     );
+
+    console.log(inProgressRecipes);
     if (inProgressRecipes) {
-      const { pathname } = window.location;
-
-      const type = pathname.split('/')[1];
-      if (!inProgressRecipes[type]) return;
-
-      const id = pathname.split('/')[2];
       const currentFinishedSteps = inProgressRecipes[type][id];
-      setFinishedSteps(currentFinishedSteps);
+      if (inProgressRecipes[type][id] !== undefined) {
+        setFinishedSteps(currentFinishedSteps);
+      }
     }
   }, []);
 
@@ -49,27 +63,46 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
     return ingredients;
   };
 
-  const isStepFinished = (step) => {
-    if (!isRecipeStarted) return false;
-    return finishedSteps.includes(step);
-  };
+  const isStepFinished = (step) => finishedSteps.includes(step);
 
   const toggleFinishedStep = (step) => {
     if (isStepFinished(step)) {
-      setFinishedSteps(
-        finishedSteps.filter((finishedStep) => finishedStep !== step),
+      const updatedSteps = finishedSteps.filter(
+        (finishedStep) => finishedStep !== step,
       );
+      setFinishedSteps(updatedSteps);
+      updateFinishedStepsOnLocalStorage(updatedSteps);
     } else {
       setFinishedSteps([...finishedSteps, step]);
+      updateFinishedStepsOnLocalStorage([...finishedSteps, step]);
     }
-    updateFinishedStepsOnLocalStorage([...finishedSteps, step]);
   };
 
-  const isRecipeFinished = () => {
+  const isRecipeFinished = useCallback(() => {
     const ingredients = getIngredients(recipe);
     const finishedStepsLength = finishedSteps.length;
     const ingredientsLength = ingredients.length;
     return finishedStepsLength === ingredientsLength;
+  }, [finishedSteps, recipe]);
+
+  const finishRecipe = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+
+    const newDoneRecipe = {
+      id: recipe.idMeal || recipe.idDrink,
+      nationality: recipe.strArea || '',
+      type: recipe.idMeal ? 'meal' : 'drink',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      doneDate: new Date().toISOString(),
+      tags: recipe.strTags ? recipe.strTags.split(',') : [],
+    };
+
+    doneRecipes.push(newDoneRecipe);
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    history.push('/done-recipes');
   };
 
   return (
@@ -81,31 +114,42 @@ export default function RecipeIngredients({ recipe, isRecipeStarted }) {
             data-testid={ `${ingredient.index}-ingredient-name-and-measure` }
             id={ ingredient.index }
           >
-            {isRecipeStarted && (
-              <input
-                type="checkbox"
+            {isRecipeStarted ? (
+              <label
+                htmlFor={ ingredient.name }
                 data-testid={ `${ingredient.index}-ingredient-step` }
-                onChange={ () => toggleFinishedStep(ingredient.index) }
-                checked={ isStepFinished(ingredient.index) }
-                className="mr-1"
-              />
+                className={
+                  isStepFinished(ingredient.index) ? styles.finished_step : ''
+                }
+              >
+                <input
+                  type="checkbox"
+                  onChange={ () => toggleFinishedStep(ingredient.index) }
+                  checked={ isStepFinished(ingredient.index) }
+                  className="mr-1"
+                  id={ ingredient.name }
+                />
+                <span>
+                  {ingredient.name}
+                  {' '}
+                  {ingredient.measure}
+                </span>
+              </label>
+            ) : (
+              <span>
+                {ingredient.name}
+                {' '}
+                {ingredient.measure}
+              </span>
             )}
-            <span
-              className={
-                isStepFinished(ingredient.index)
-                  ? 'line-through decoration-solid decoration-black'
-                  : ''
-              }
-            >
-              {ingredient.name}
-              {' '}
-              {ingredient.measure}
-            </span>
           </li>
         ))}
       </ul>
       {isRecipeStarted && (
-        <FinishRecipeButton isDisabled={ !isRecipeFinished() } />
+        <FinishRecipeButton
+          isDisabled={ !isRecipeFinished() }
+          finishRecipe={ finishRecipe }
+        />
       )}
     </>
   );

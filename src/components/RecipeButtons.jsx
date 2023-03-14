@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import copy from 'clipboard-copy';
-import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import ShareButton from './ShareButton';
 
 export default function RecipeButtons({ recipe }) {
-  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -19,13 +17,6 @@ export default function RecipeButtons({ recipe }) {
 
     setIsFavorite(isFavoriteRecipe);
   }, [recipe]);
-
-  const copyLink = () => {
-    const link = window.location.href;
-    const parsedLink = link.replace('/in-progress', '');
-    copy(parsedLink);
-    setIsLinkCopied(true);
-  };
 
   const toggleRecipesAsFavorite = () => {
     if (isFavorite) {
@@ -63,23 +54,17 @@ export default function RecipeButtons({ recipe }) {
   };
 
   return (
-    <>
-      <div>
-        <button type="button" onClick={ copyLink }>
-          <img src={ shareIcon } alt="" data-testid="share-btn" />
-          <p>Compartilhar</p>
-        </button>
-        <button type="button" onClick={ toggleRecipesAsFavorite }>
-          <img
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt=""
-            data-testid="favorite-btn"
-          />
-          <p>Favoritar</p>
-        </button>
-      </div>
-      {isLinkCopied && <p>Link copied!</p>}
-    </>
+    <div>
+      <button type="button" onClick={ toggleRecipesAsFavorite }>
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt=""
+          data-testid="favorite-btn"
+        />
+        <p>Favoritar</p>
+      </button>
+      <ShareButton testId="share-btn" />
+    </div>
   );
 }
 
