@@ -1,3 +1,5 @@
-src/serviceWorker.js 
+src/serviceWorker.js
+src/index.js
+src/App.js
 cypress.config.js
 coverage/*
