@@ -2,7 +2,8 @@
 
 ![img](appRecipes.gif)
 
-[Link deploy](https://georgia-rocha.github.io/recipes-app/)
+[Deploy Link](https://georgia-rocha.github.io/recipes-app/)
+
 # Para clonar e testar
 
 1 - Clone o repositório com o comando **git clone**:
