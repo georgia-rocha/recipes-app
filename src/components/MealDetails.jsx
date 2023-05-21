@@ -39,14 +39,21 @@ export default function MealDetails({ recipe, isRecipeStarted }) {
         src={ meal.strMealThumb }
         alt={ meal.strMeal }
         data-testid="recipe-photo"
+        className="flex"
       />
       <h1 data-testid="recipe-title">{meal.strMeal}</h1>
       <p data-testid="recipe-category">{meal.strCategory}</p>
       <h2>Ingredientes</h2>
       <RecipeIngredients recipe={ meal } isRecipeStarted={ isRecipeStarted } />
       <h2>Instruções</h2>
-      <p data-testid="instructions">{meal.strInstructions}</p>
-      <YouTubeEmbed embedId={ embedId } />
+      <p
+        data-testid="instructions"
+        className="text-justify p-3 border mx-3"
+      >
+        {meal.strInstructions}
+      </p>
+      <h2>Video</h2>
+      <YouTubeEmbed embedId={ embedId } className="" />
       <h2>Recomendações</h2>
       <RecommendationsDrinks recipes={ recipes.drinks } />
       <div>
